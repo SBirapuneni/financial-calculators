@@ -116,11 +116,6 @@ export default function Home() {
             const Icon = calc.icon;
             const CardContent = (
               <Card className="relative h-full p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                {calc.comingSoon && (
-                  <div className="absolute top-4 right-4 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    Coming Soon
-                  </div>
-                )}
                 <div className={`inline-block p-3 ${calc.color} rounded-lg mb-4 group-hover:scale-110 transition-transform`}>
                   <Icon className="w-8 h-8 text-white" />
                 </div>
@@ -130,20 +125,14 @@ export default function Home() {
                 <p className="text-gray-600 dark:text-gray-400">
                   {calc.description}
                 </p>
-                {!calc.comingSoon && (
-                  <div className="mt-4 text-green-600 dark:text-green-400 font-medium flex items-center gap-2">
-                    Try it now
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
-                  </div>
-                )}
+                <div className="mt-4 text-green-600 dark:text-green-400 font-medium flex items-center gap-2">
+                  Try it now
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </Card>
             );
 
-            return calc.comingSoon ? (
-              <div key={calc.title} className="opacity-75 cursor-not-allowed">
-                {CardContent}
-              </div>
-            ) : (
+            return (
               <Link key={calc.title} href={calc.href}>
                 {CardContent}
               </Link>
