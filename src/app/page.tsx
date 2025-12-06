@@ -1,65 +1,223 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { Calculator, TrendingUp, PiggyBank, DollarSign, Home as HomeIcon, Receipt, Wallet } from "lucide-react";
+import { Metadata } from "next";
+import NewsletterSignup from "@/components/shared/NewsletterSignup";
+
+export const metadata: Metadata = {
+  title: "Free Financial Calculators - Retirement, Mortgage, Tax, Loan & Investment | 2025",
+  description: "Free online financial calculators for retirement planning, mortgage payments, tax estimates, loans, SIP, and compound interest. Make smarter financial decisions with our easy-to-use tools.",
+  keywords: "financial calculator, retirement calculator, mortgage calculator, tax calculator, loan calculator, SIP calculator, compound interest calculator, investment calculator",
+  openGraph: {
+    title: "Free Financial Calculators - Plan Your Financial Future",
+    description: "Calculate retirement savings, mortgage payments, taxes, and investment returns with our free tools",
+    type: "website",
+  },
+};
 
 export default function Home() {
+  const calculators = [
+    {
+      title: "Retirement Calculator",
+      description: "Plan your retirement savings and see if you're on track",
+      icon: Wallet,
+      href: "/calculators/retirement",
+      color: "bg-purple-500",
+    },
+    {
+      title: "Mortgage Calculator",
+      description: "Calculate monthly payments including taxes, insurance, and PMI",
+      icon: HomeIcon,
+      href: "/calculators/mortgage",
+      color: "bg-orange-500",
+    },
+    {
+      title: "Tax Calculator",
+      description: "Estimate your 2025 federal income tax and take-home pay",
+      icon: Receipt,
+      href: "/calculators/tax",
+      color: "bg-red-500",
+    },
+    {
+      title: "Compound Interest Calculator",
+      description: "Calculate how your money grows over time with compound interest",
+      icon: TrendingUp,
+      href: "/calculators/compound-interest",
+      color: "bg-green-500",
+    },
+    {
+      title: "Loan Calculator",
+      description: "Calculate your monthly loan payments and total interest",
+      icon: DollarSign,
+      href: "/calculators/loan",
+      color: "bg-blue-500",
+    },
+    {
+      title: "SIP Calculator",
+      description: "Plan your systematic investment plan and see future returns",
+      icon: PiggyBank,
+      href: "/calculators/sip",
+      color: "bg-pink-500",
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Financial Calculators',
+            description: 'Free financial calculators for retirement, mortgage, tax, and investment planning',
+            url: 'https://financialcalculators.com',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://financialcalculators.com/search?q={search_term_string}',
+              'query-input': 'required name=search_term_string',
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Financial Calculators',
+            description: 'Free online financial planning tools and calculators',
+            url: 'https://financialcalculators.com',
+          }),
+        }}
+      />
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+      <main className="container mx-auto px-4 py-16">
+        {/* Hero Section */}
+        <div className="text-center space-y-4 mb-16">
+          <div className="flex justify-center mb-6">
+            <div className="p-4 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl">
+              <Calculator className="w-16 h-16 text-white" />
+            </div>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
+            Financial Calculators
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Make informed financial decisions with our easy-to-use calculators. 
+            Plan your investments, loans, and savings with precision.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Calculators Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {calculators.map((calc) => {
+            const Icon = calc.icon;
+            const CardContent = (
+              <Card className="relative h-full p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                {calc.comingSoon && (
+                  <div className="absolute top-4 right-4 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    Coming Soon
+                  </div>
+                )}
+                <div className={`inline-block p-3 ${calc.color} rounded-lg mb-4 group-hover:scale-110 transition-transform`}>
+                  <Icon className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+                  {calc.title}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {calc.description}
+                </p>
+                {!calc.comingSoon && (
+                  <div className="mt-4 text-green-600 dark:text-green-400 font-medium flex items-center gap-2">
+                    Try it now
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                )}
+              </Card>
+            );
+
+            return calc.comingSoon ? (
+              <div key={calc.title} className="opacity-75 cursor-not-allowed">
+                {CardContent}
+              </div>
+            ) : (
+              <Link key={calc.title} href={calc.href}>
+                {CardContent}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Features Section */}
+        <div className="mt-24 max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Why Use Our Calculators?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center space-y-3">
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-2xl">📊</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Visual Results
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                See your calculations come to life with interactive charts and graphs
+              </p>
+            </div>
+            <div className="text-center space-y-3">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Instant Calculations
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Get accurate results immediately as you update your inputs
+              </p>
+            </div>
+            <div className="text-center space-y-3">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-2xl">🔒</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                100% Free
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                All calculators are completely free with no hidden fees or signups
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Blog CTA Section */}
+        <div className="mt-24 max-w-4xl mx-auto">
+          <Card className="p-8 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                Learn More About Financial Planning
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Read our expert guides on retirement planning, investment strategies, and money management tips
+              </p>
+              <Link href="/blog">
+                <button className="px-8 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                  Visit Our Blog
+                </button>
+              </Link>
+            </div>
+          </Card>
+        </div>
+
+        {/* Newsletter Signup */}
+        <div className="mt-12 max-w-4xl mx-auto">
+          <NewsletterSignup />
         </div>
       </main>
     </div>
+    </>
   );
 }
