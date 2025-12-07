@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { Calculator, Wallet, Home, Receipt, TrendingUp, DollarSign, PiggyBank } from "lucide-react";
+import { Calculator, Wallet, Home, Receipt, TrendingUp, DollarSign, PiggyBank, CreditCard, ArrowRightLeft, Landmark } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "All Financial Calculators - Free Tools for Smart Money Decisions",
-  description: "Browse our complete collection of free financial calculators including retirement, mortgage, tax, loan, SIP, and compound interest calculators.",
+  description: "Browse our complete collection of free financial calculators including retirement, mortgage, tax, loan, SIP, EMI, FD, and compound interest calculators.",
 };
 
 export default function CalculatorsPage() {
@@ -57,6 +57,38 @@ export default function CalculatorsPage() {
       href: "/calculators/sip",
       color: "bg-pink-500",
       features: ["Future value projection", "Return on investment", "Wealth accumulation"],
+    },
+    {
+      title: "EMI Calculator",
+      description: "Calculate your Equated Monthly Installment (EMI) for home loans, car loans, and personal loans with detailed payment breakdown.",
+      icon: CreditCard,
+      href: "/calculators/emi",
+      color: "bg-indigo-500",
+      features: ["Monthly EMI calculation", "Interest breakdown", "Amortization schedule"],
+    },
+    {
+      title: "Loan Payoff Calculator",
+      description: "See how extra payments can help you pay off your loan faster and save thousands in interest. Calculate time and money saved.",
+      icon: Calculator,
+      href: "/calculators/loan-payoff",
+      color: "bg-teal-500",
+      features: ["Extra payment impact", "Interest savings", "Payoff timeline"],
+    },
+    {
+      title: "APR to APY Calculator",
+      description: "Convert between Annual Percentage Rate (APR) and Annual Percentage Yield (APY) to understand true interest rates.",
+      icon: ArrowRightLeft,
+      href: "/calculators/apr-apy",
+      color: "bg-cyan-500",
+      features: ["APR to APY conversion", "APY to APR conversion", "Interest comparison"],
+    },
+    {
+      title: "Fixed Deposit Calculator",
+      description: "Calculate FD maturity amount, interest earned, and returns. Compare compound vs simple interest on your deposits.",
+      icon: Landmark,
+      href: "/calculators/fd",
+      color: "bg-emerald-500",
+      features: ["Maturity calculation", "Interest earned", "Compound interest"],
     },
   ];
 

@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { Calculator, TrendingUp, PiggyBank, DollarSign, Home as HomeIcon, Receipt, Wallet } from "lucide-react";
+import { Calculator, TrendingUp, PiggyBank, DollarSign, Home as HomeIcon, Receipt, Wallet, CreditCard, ArrowRightLeft, Landmark } from "lucide-react";
 import { Metadata } from "next";
 import NewsletterSignup from "@/components/shared/NewsletterSignup";
 
 export const metadata: Metadata = {
-  title: "Free Financial Calculators - Retirement, Mortgage, Tax, Loan & Investment | 2025",
-  description: "Free online financial calculators for retirement planning, mortgage payments, tax estimates, loans, SIP, and compound interest. Make smarter financial decisions with our easy-to-use tools.",
-  keywords: "financial calculator, retirement calculator, mortgage calculator, tax calculator, loan calculator, SIP calculator, compound interest calculator, investment calculator",
+  title: "Free Financial Calculators - Retirement, Mortgage, Tax, Loan, EMI & Investment | 2025",
+  description: "Free online financial calculators for retirement planning, mortgage payments, tax estimates, loans, EMI, SIP, FD, and compound interest. Make smarter financial decisions with our easy-to-use tools.",
+  keywords: "financial calculator, retirement calculator, mortgage calculator, tax calculator, loan calculator, SIP calculator, compound interest calculator, investment calculator, EMI calculator, FD calculator",
   openGraph: {
     title: "Free Financial Calculators - Plan Your Financial Future",
-    description: "Calculate retirement savings, mortgage payments, taxes, and investment returns with our free tools",
+    description: "Calculate retirement savings, mortgage payments, taxes, EMI, and investment returns with our free tools",
     type: "website",
   },
 };
@@ -58,6 +58,34 @@ export default function Home() {
       icon: PiggyBank,
       href: "/calculators/sip",
       color: "bg-pink-500",
+    },
+    {
+      title: "EMI Calculator",
+      description: "Calculate loan EMI for home, car, and personal loans",
+      icon: CreditCard,
+      href: "/calculators/emi",
+      color: "bg-indigo-500",
+    },
+    {
+      title: "Loan Payoff Calculator",
+      description: "See how extra payments help you save on interest",
+      icon: Calculator,
+      href: "/calculators/loan-payoff",
+      color: "bg-teal-500",
+    },
+    {
+      title: "APR to APY Calculator",
+      description: "Convert between APR and APY interest rates",
+      icon: ArrowRightLeft,
+      href: "/calculators/apr-apy",
+      color: "bg-cyan-500",
+    },
+    {
+      title: "Fixed Deposit Calculator",
+      description: "Calculate FD maturity amount and interest earned",
+      icon: Landmark,
+      href: "/calculators/fd",
+      color: "bg-emerald-500",
     },
   ];
 
