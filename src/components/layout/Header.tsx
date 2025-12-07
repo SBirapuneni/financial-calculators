@@ -15,22 +15,22 @@ export default function Header() {
           <div className="flex items-center gap-6">
             <div className="hidden md:flex space-x-6">
               <Link
+                href="/calculators/retirement"
+                className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
+              >
+                Retirement
+              </Link>
+              <Link
+                href="/calculators/mortgage"
+                className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
+              >
+                Mortgage
+              </Link>
+              <Link
                 href="/calculators/loan"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
               >
                 Loan
-              </Link>
-              <Link
-                href="/calculators/investment"
-                className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
-              >
-                Investment
-              </Link>
-              <Link
-                href="/calculators/tax"
-                className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
-              >
-                Tax
               </Link>
               <Link
                 href="/calculators"
