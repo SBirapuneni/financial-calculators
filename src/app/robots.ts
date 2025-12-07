@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://financialcalculators.com/sitemap.xml',
+    sitemap: 'https://financialcalc.vercel.app/sitemap.xml',
   };
 }

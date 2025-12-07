@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://financialcalculators.com';
+  const baseUrl = 'https://financialcalc.vercel.app';
   
   return [
     {
