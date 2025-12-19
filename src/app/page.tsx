@@ -18,6 +18,48 @@ export const metadata: Metadata = {
 export default function Home() {
   const calculators = [
     {
+      title: "SIP Calculator",
+      description: "Plan your systematic investment plan and see future returns",
+      icon: PiggyBank,
+      href: "/calculators/sip",
+      color: "bg-pink-500",
+    },
+    {
+      title: "EMI Calculator",
+      description: "Calculate loan EMI for home, car, and personal loans",
+      icon: CreditCard,
+      href: "/calculators/emi",
+      color: "bg-indigo-500",
+    },
+    {
+      title: "Loan Calculator",
+      description: "Calculate your monthly loan payments and total interest",
+      icon: DollarSign,
+      href: "/calculators/loan",
+      color: "bg-blue-500",
+    },
+    {
+      title: "Loan Payoff Calculator",
+      description: "See how extra payments help you save on interest",
+      icon: Calculator,
+      href: "/calculators/loan-payoff",
+      color: "bg-teal-500",
+    },
+    {
+      title: "Fixed Deposit Calculator",
+      description: "Calculate FD maturity amount and interest earned",
+      icon: Landmark,
+      href: "/calculators/fd",
+      color: "bg-emerald-500",
+    },
+    {
+      title: "Compound Interest Calculator",
+      description: "Calculate how your money grows over time with compound interest",
+      icon: TrendingUp,
+      href: "/calculators/compound-interest",
+      color: "bg-green-500",
+    },
+    {
       title: "Retirement Calculator",
       description: "Plan your retirement savings and see if you're on track",
       icon: Wallet,
@@ -39,53 +81,11 @@ export default function Home() {
       color: "bg-red-500",
     },
     {
-      title: "Compound Interest Calculator",
-      description: "Calculate how your money grows over time with compound interest",
-      icon: TrendingUp,
-      href: "/calculators/compound-interest",
-      color: "bg-green-500",
-    },
-    {
-      title: "Loan Calculator",
-      description: "Calculate your monthly loan payments and total interest",
-      icon: DollarSign,
-      href: "/calculators/loan",
-      color: "bg-blue-500",
-    },
-    {
-      title: "SIP Calculator",
-      description: "Plan your systematic investment plan and see future returns",
-      icon: PiggyBank,
-      href: "/calculators/sip",
-      color: "bg-pink-500",
-    },
-    {
-      title: "EMI Calculator",
-      description: "Calculate loan EMI for home, car, and personal loans",
-      icon: CreditCard,
-      href: "/calculators/emi",
-      color: "bg-indigo-500",
-    },
-    {
-      title: "Loan Payoff Calculator",
-      description: "See how extra payments help you save on interest",
-      icon: Calculator,
-      href: "/calculators/loan-payoff",
-      color: "bg-teal-500",
-    },
-    {
       title: "APR to APY Calculator",
       description: "Convert between APR and APY interest rates",
       icon: ArrowRightLeft,
       href: "/calculators/apr-apy",
       color: "bg-cyan-500",
-    },
-    {
-      title: "Fixed Deposit Calculator",
-      description: "Calculate FD maturity amount and interest earned",
-      icon: Landmark,
-      href: "/calculators/fd",
-      color: "bg-emerald-500",
     },
   ];
 
