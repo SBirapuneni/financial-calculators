@@ -148,7 +148,7 @@ export default function CalculatorsPage() {
                       </div>
 
                       {/* CTA */}
-                      <div className="mt-4 text-blue-600 dark:text-blue-400 font-medium flex items-center gap-2">
+                      <div className="mt-4 font-medium flex items-center gap-2" style={{ color: 'var(--color-primary)' }}>
                         Try it now
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
                       </div>

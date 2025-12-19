@@ -234,3 +234,67 @@
   animation: slide-up 0.3s ease-out;
 }
 
+/* Occasion Theme Animations */
+
+/* Snowfall animation for Christmas */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+  }
+  100% {
+    transform: translateY(110vh) translateX(100px);
+  }
+}
+
+.snowfall .snow {
+  position: absolute;
+  top: -10vh;
+  color: white;
+  user-select: none;
+  animation: snowfall linear infinite;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Confetti animation for New Year */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+
+/* Hearts animation for Valentine's */
+@keyframes hearts-float {
+  0% {
+    transform: translateY(110vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Pulse glow for themed elements */
+@keyframes theme-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--gradient-from);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--gradient-to);
+  }
+}
+
+[data-theme="christmas"] .themed-gradient,
+[data-theme="newyear"] .themed-gradient,
+[data-theme="valentine"] .themed-gradient {
+  animation: theme-glow 3s ease-in-out infinite;
+}

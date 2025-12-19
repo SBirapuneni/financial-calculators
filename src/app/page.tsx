@@ -143,7 +143,7 @@ export default function Home() {
           {calculators.map((calc) => {
             const Icon = calc.icon;
             const CardContent = (
-              <Card className="relative h-full p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group">
+              <Card className="relative h-full p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group themed-gradient border-2 hover:border-opacity-50" style={{ borderColor: 'var(--color-primary)' }}>
                 <div className={`inline-block p-3 ${calc.color} rounded-lg mb-4 group-hover:scale-110 transition-transform`}>
                   <Icon className="w-8 h-8 text-white" />
                 </div>
@@ -153,7 +153,7 @@ export default function Home() {
                 <p className="text-gray-600 dark:text-gray-400">
                   {calc.description}
                 </p>
-                <div className="mt-4 text-green-600 dark:text-green-400 font-medium flex items-center gap-2">
+                <div className="mt-4 font-medium flex items-center gap-2" style={{ color: 'var(--color-primary)' }}>
                   Try it now
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
