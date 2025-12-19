@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import FDCalculator from '@/components/calculators/FDCalculator';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 import { PiggyBank } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -10,21 +11,22 @@ export const metadata: Metadata = {
 
 export default function FDCalculatorPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <PiggyBank className="h-8 w-8 text-blue-600" />
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-            Fixed Deposit Calculator
-          </h1>
+    <CalculatorPageWrapper calculatorName="fd">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <PiggyBank className="h-8 w-8 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+              Fixed Deposit Calculator
+            </h1>
+          </div>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Calculate your Fixed Deposit (FD) maturity amount, interest earned, and effective returns.
+            Compare compound interest vs simple interest to maximize your savings.
+          </p>
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Calculate your Fixed Deposit (FD) maturity amount, interest earned, and effective returns.
-          Compare compound interest vs simple interest to maximize your savings.
-        </p>
-      </div>
 
-      <FDCalculator />
+        <FDCalculator />
 
       <div className="mt-12 space-y-6 text-gray-700 dark:text-gray-300">
         <div>
@@ -187,5 +189,6 @@ export default function FDCalculatorPage() {
         </div>
       </div>
     </div>
+    </CalculatorPageWrapper>
   );
 }

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import LoanPayoffCalculator from '@/components/calculators/LoanPayoffCalculator';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 import { Calculator } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -10,21 +11,22 @@ export const metadata: Metadata = {
 
 export default function LoanPayoffCalculatorPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <Calculator className="h-8 w-8 text-blue-600" />
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-            Loan Payoff Calculator
-          </h1>
+    <CalculatorPageWrapper calculatorName="loan-payoff">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <Calculator className="h-8 w-8 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+              Loan Payoff Calculator
+            </h1>
+          </div>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Calculate how extra payments can help you pay off your loan faster and save thousands in interest.
+            See the impact of additional monthly payments on your debt payoff timeline.
+          </p>
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Calculate how extra payments can help you pay off your loan faster and save thousands in interest.
-          See the impact of additional monthly payments on your debt payoff timeline.
-        </p>
-      </div>
 
-      <LoanPayoffCalculator />
+        <LoanPayoffCalculator />
 
       <div className="mt-12 space-y-6 text-gray-700 dark:text-gray-300">
         <div>
@@ -118,5 +120,6 @@ export default function LoanPayoffCalculatorPage() {
         </div>
       </div>
     </div>
+    </CalculatorPageWrapper>
   );
 }

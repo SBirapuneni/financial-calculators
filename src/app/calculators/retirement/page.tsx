@@ -1,4 +1,5 @@
 import RetirementCalculator from '@/components/calculators/RetirementCalculator';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RetirementPage() {
   return (
-    <>
+    <CalculatorPageWrapper calculatorName="retirement">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -35,6 +36,6 @@ export default function RetirementPage() {
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-12">
         <RetirementCalculator />
       </div>
-    </>
+    </CalculatorPageWrapper>
   );
 }

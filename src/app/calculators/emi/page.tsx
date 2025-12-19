@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import EMICalculator from '@/components/calculators/EMICalculator';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 import { Calculator } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 
 export default function EMICalculatorPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <CalculatorPageWrapper calculatorName="emi">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-4">
           <Calculator className="h-8 w-8 text-blue-600" />
@@ -103,5 +105,6 @@ export default function EMICalculatorPage() {
         </div>
       </div>
     </div>
+    </CalculatorPageWrapper>
   );
 }

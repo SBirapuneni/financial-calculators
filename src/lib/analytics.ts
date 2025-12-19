@@ -43,6 +43,39 @@ export const trackCalculatorView = (calculatorName: string) => {
   trackEvent('calculator_opened', {
     calculator_name: calculatorName,
     page_path: window.location.pathname,
+    timestamp: new Date().toISOString(),
+  });
+};
+
+/**
+ * Track time spent on calculator page
+ */
+export const trackTimeSpent = (
+  calculatorName: string,
+  timeInSeconds: number
+) => {
+  trackEvent('calculator_time_spent', {
+    calculator_name: calculatorName,
+    time_seconds: Math.round(timeInSeconds),
+    time_minutes: Math.round(timeInSeconds / 60 * 10) / 10, // Round to 1 decimal
+    page_path: window.location.pathname,
+  });
+};
+
+/**
+ * Track calculator engagement (scroll depth, interactions)
+ */
+export const trackCalculatorEngagement = (
+  calculatorName: string,
+  engagementData: {
+    calculationCount?: number;
+    scrollDepth?: number;
+    inputsChanged?: number;
+  }
+) => {
+  trackEvent('calculator_engagement', {
+    calculator_name: calculatorName,
+    ...engagementData,
   });
 };
 

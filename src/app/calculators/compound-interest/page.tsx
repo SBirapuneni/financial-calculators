@@ -1,5 +1,6 @@
 import CompoundInterestCalculator from '@/components/calculators/CompoundInterestCalculator';
 import { Metadata } from 'next';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
   title: 'Compound Interest Calculator | Financial Calculators',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function CompoundInterestPage() {
   return (
-    <>
+    <CalculatorPageWrapper calculatorName="compound-interest">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -35,6 +36,6 @@ export default function CompoundInterestPage() {
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-12">
         <CompoundInterestCalculator />
       </div>
-    </>
+    </CalculatorPageWrapper>
   );
 }

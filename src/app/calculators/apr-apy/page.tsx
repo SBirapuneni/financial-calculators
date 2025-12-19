@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import APRtoAPYCalculator from '@/components/calculators/APRtoAPYCalculator';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 import { Calculator } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -10,21 +11,22 @@ export const metadata: Metadata = {
 
 export default function APRtoAPYCalculatorPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <Calculator className="h-8 w-8 text-blue-600" />
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-            APR to APY Calculator
-          </h1>
+    <CalculatorPageWrapper calculatorName="apr-apy">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <Calculator className="h-8 w-8 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+              APR to APY Calculator
+            </h1>
+          </div>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Convert between APR (Annual Percentage Rate) and APY (Annual Percentage Yield) to understand
+            the true cost of loans or the real return on investments with compound interest.
+          </p>
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Convert between APR (Annual Percentage Rate) and APY (Annual Percentage Yield) to understand
-          the true cost of loans or the real return on investments with compound interest.
-        </p>
-      </div>
 
-      <APRtoAPYCalculator />
+        <APRtoAPYCalculator />
 
       <div className="mt-12 space-y-6 text-gray-700 dark:text-gray-300">
         <div>
@@ -166,5 +168,6 @@ export default function APRtoAPYCalculatorPage() {
         </div>
       </div>
     </div>
+    </CalculatorPageWrapper>
   );
 }

@@ -1,5 +1,6 @@
 import TaxCalculator from '@/components/calculators/TaxCalculator';
 import { Metadata } from 'next';
+import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
   title: 'Income Tax Calculator 2025 - Estimate Your Tax Refund | Financial Calculators',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function TaxPage() {
   return (
-    <>
+    <CalculatorPageWrapper calculatorName="tax">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -35,6 +36,6 @@ export default function TaxPage() {
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-12">
         <TaxCalculator />
       </div>
-    </>
+    </CalculatorPageWrapper>
   );
 }
