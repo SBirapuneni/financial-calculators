@@ -260,6 +260,52 @@ npm run start
    - Email calculator results to users
    - Weekly digest of blog posts
 
+## 🔒 Security & Environment Variables
+
+### Sensitive Data Protection
+
+**What's Protected:**
+- All `.env*` files are in `.gitignore` and never committed to git
+- Vercel environment variables are encrypted and stored securely
+- Google Analytics ID is public-facing (safe to expose in client code)
+
+### Environment Variables Setup
+
+1. **Local Development:**
+   ```bash
+   # Copy the template
+   cp .env.example .env.local
+   
+   # Add your values to .env.local
+   NEXT_PUBLIC_GA_MEASUREMENT_ID=G-JVHMR8RYRY  # Your actual GA4 ID
+   ```
+
+2. **Vercel Production:**
+   - Add environment variables in Vercel dashboard: Settings → Environment Variables
+   - Or use Vercel CLI:
+     ```bash
+     vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID production
+     ```
+
+3. **What's Safe to Share:**
+   - ✅ Google Analytics Measurement ID (public-facing)
+   - ✅ AdSense Client ID (public-facing)
+   - ✅ Public API keys
+   
+4. **Never Commit:**
+   - ❌ Private API keys
+   - ❌ Database credentials
+   - ❌ Auth tokens
+   - ❌ `.env.local` or `.env.vercel` files
+
+### Security Best Practices
+
+1. **Use Vercel Environment Variables** for production secrets
+2. **Never hardcode** sensitive values in code
+3. **Prefix public vars** with `NEXT_PUBLIC_` so they're included in client bundle
+4. **Rotate tokens** if accidentally exposed
+5. **Check with**: `git log --all --full-history -- "*.env*"` to verify no env files in history
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
