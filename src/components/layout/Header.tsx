@@ -15,16 +15,16 @@ export default function Header() {
           <div className="flex items-center gap-6">
             <div className="hidden md:flex space-x-6">
               <Link
-                href="/calculators/retirement"
+                href="/calculators/sip"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
               >
-                Retirement
+                SIP
               </Link>
               <Link
-                href="/calculators/mortgage"
+                href="/calculators/emi"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300"
               >
-                Mortgage
+                EMI
               </Link>
               <Link
                 href="/calculators/loan"
