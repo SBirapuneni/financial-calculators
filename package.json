@@ -10,7 +10,8 @@
     "deploy": "./deploy.sh deploy",
     "deploy:preview": "./deploy.sh preview",
     "deploy:verify": "./deploy.sh verify",
-    "deploy:status": "./deploy.sh status"
+    "deploy:status": "./deploy.sh status",
+    "deploy:sync": "./deploy.sh sync"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

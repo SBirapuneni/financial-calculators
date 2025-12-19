@@ -114,6 +114,55 @@ test_production() {
     npm run start
 }
 
+# Sync environment variables to Vercel
+sync_env_to_vercel() {
+    print_header "Syncing Environment Variables to Vercel"
+    
+    if [ ! -f .env.local ]; then
+        print_error ".env.local not found. Cannot sync environment variables."
+        return 1
+    fi
+    
+    # Check if GA_MEASUREMENT_ID is set
+    if grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID=G-" .env.local; then
+        GA_ID=$(grep "NEXT_PUBLIC_GA_MEASUREMENT_ID" .env.local | cut -d'=' -f2 | tr -d '"' | tr -d ' ')
+        
+        if [[ $GA_ID == *"XXXXXXXXXX"* ]]; then
+            print_warning "Google Analytics ID is placeholder. Skipping..."
+            return 1
+        fi
+        
+        # Check if already set in Vercel
+        if npx vercel env ls 2>&1 | grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID"; then
+            print_info "NEXT_PUBLIC_GA_MEASUREMENT_ID already exists in Vercel"
+            read -p "Do you want to update it? (y/n) " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Keeping existing value"
+                return 0
+            fi
+            
+            # Remove existing
+            print_info "Removing old value..."
+            npx vercel env rm NEXT_PUBLIC_GA_MEASUREMENT_ID production -y 2>/dev/null || true
+            npx vercel env rm NEXT_PUBLIC_GA_MEASUREMENT_ID preview -y 2>/dev/null || true
+            npx vercel env rm NEXT_PUBLIC_GA_MEASUREMENT_ID development -y 2>/dev/null || true
+        fi
+        
+        # Add to all environments
+        print_info "Adding NEXT_PUBLIC_GA_MEASUREMENT_ID to Vercel..."
+        echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID production
+        echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID preview  
+        echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID development
+        
+        print_success "Environment variables synced to Vercel!"
+        return 0
+    else
+        print_warning "NEXT_PUBLIC_GA_MEASUREMENT_ID not found in .env.local"
+        return 1
+    fi
+}
+
 # Deploy to Vercel (production)
 deploy_production() {
     print_header "Deploying to Vercel Production"
@@ -137,11 +186,20 @@ deploy_production() {
         print_success "Git working directory is clean"
     fi
     
-    # Check Vercel environment variables
+    # Check and sync Vercel environment variables
     print_info "Checking Vercel environment variables..."
-    npx vercel env ls | grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID" && \
-        print_success "GA_MEASUREMENT_ID is set in Vercel" || \
-        print_warning "GA_MEASUREMENT_ID may not be set in Vercel"
+    if npx vercel env ls 2>&1 | grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID"; then
+        print_success "GA_MEASUREMENT_ID is set in Vercel"
+    else
+        print_warning "GA_MEASUREMENT_ID not found in Vercel!"
+        read -p "Do you want to sync from .env.local? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            sync_env_to_vercel
+        else
+            print_warning "Deploying without environment variables. GA tracking may not work!"
+        fi
+    fi
     
     # Deploy to production
     print_info "\nDeploying to production..."
@@ -222,6 +280,7 @@ show_help() {
     echo "  preview          Deploy to Vercel preview environment"
     echo "  status           Check deployment status"
     echo "  verify           Verify production deployment is working"
+    echo "  sync             Sync environment variables from .env.local to Vercel"
     echo "  install          Install dependencies"
     echo "  check            Check environment variables"
     echo "  help             Show this help message"
@@ -229,6 +288,7 @@ show_help() {
     echo "Examples:"
     echo "  ./deploy.sh dev              # Start local dev server"
     echo "  ./deploy.sh build            # Build for production"
+    echo "  ./deploy.sh sync             # Sync env vars to Vercel"
     echo "  ./deploy.sh deploy           # Deploy to production"
     echo "  ./deploy.sh verify           # Verify production deployment"
     echo ""
@@ -257,6 +317,9 @@ main() {
             ;;
         verify)
             verify_production
+            ;;
+        sync)
+            sync_env_to_vercel
             ;;
         install|deps)
             install_deps
