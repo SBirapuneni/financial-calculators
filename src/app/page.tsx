@@ -125,7 +125,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center space-y-4 mb-16">
           <div className="flex justify-center mb-6">
-            <div className="p-4 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl">
+            <div className="p-4 rounded-2xl" style={{ background: 'linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to))' }}>
               <Calculator className="w-16 h-16 text-white" />
             </div>
           </div>

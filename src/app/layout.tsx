@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/shared/CookieConsent";
 import PWAInstaller from "@/components/shared/PWAInstaller";
+import ThemeProvider from "@/components/shared/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,11 +74,13 @@ export default function RootLayout({
       >
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
         {ADSENSE_CLIENT_ID && <AdSenseScript clientId={ADSENSE_CLIENT_ID} />}
-        <PWAInstaller />
-        <Header />
-        {children}
-        <Footer />
-        <CookieConsent />
+        <ThemeProvider>
+          <PWAInstaller />
+          <Header />
+          {children}
+          <Footer />
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   );
