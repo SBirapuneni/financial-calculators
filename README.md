@@ -4,7 +4,7 @@ A comprehensive suite of free, SEO-optimized financial calculators built with Ne
 
 ## 🚀 Live Demo
 
-Visit the live site: [financialcalculators.com](https://financialcalculators.com)
+Visit the live site: [calculators.utltyhub.com](https://calculators.utltyhub.com)
 
 ## ✨ Features
 
@@ -306,6 +306,15 @@ npm run start
 4. **Rotate tokens** if accidentally exposed
 5. **Check with**: `git log --all --full-history -- "*.env*"` to verify no env files in history
 
+## 📚 Documentation
+
+All detailed documentation is available in the [docs/](./docs/) folder:
+
+- **[Deployment Guide](./docs/DEPLOYMENT.md)** - Deploy to Vercel
+- **[SEO Checklist](./docs/SEO_CHECKLIST.md)** - SEO & AdSense setup
+- **[Analytics Setup](./docs/SETUP_ANALYTICS.md)** - Configure GA4 and tracking
+- **[Security Guide](./docs/SECURITY.md)** - Security best practices
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -327,4 +336,3 @@ For questions or support, please open an issue on GitHub.
 ---
 
 **Made with ❤️ for better financial planning**
-# Trigger deployment
