@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 
@@ -8,7 +8,7 @@ interface GoogleAnalyticsProps {
   measurementId: string;
 }
 
-export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
+function AnalyticsTracker({ measurementId }: { measurementId: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -25,6 +25,10 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
     }
   }, [pathname, searchParams, measurementId]);
 
+  return null;
+}
+
+export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
   if (!measurementId) {
     console.warn('Google Analytics measurement ID is not set');
     return null;
@@ -50,6 +54,9 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
           `,
         }}
       />
+      <Suspense fallback={null}>
+        <AnalyticsTracker measurementId={measurementId} />
+      </Suspense>
     </>
   );
 }
