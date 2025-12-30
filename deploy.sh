@@ -58,6 +58,7 @@ check_env_vars() {
     print_header "Checking Environment Variables"
     
     if [ -f .env.local ]; then
+        # Check Google Analytics
         if grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID=G-" .env.local; then
             GA_ID=$(grep "NEXT_PUBLIC_GA_MEASUREMENT_ID" .env.local | cut -d'=' -f2)
             if [[ $GA_ID != *"XXXXXXXXXX"* ]]; then
@@ -67,6 +68,18 @@ check_env_vars() {
             fi
         else
             print_warning "Google Analytics ID not found in .env.local"
+        fi
+        
+        # Check Google AdSense
+        if grep -q "NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-" .env.local; then
+            ADSENSE_ID=$(grep "NEXT_PUBLIC_ADSENSE_CLIENT_ID" .env.local | cut -d'=' -f2)
+            if [[ $ADSENSE_ID != *"XXXXXXXXXXXXXXXX"* ]]; then
+                print_success "Google AdSense ID configured: $ADSENSE_ID"
+            else
+                print_warning "Google AdSense ID is placeholder. Update .env.local"
+            fi
+        else
+            print_info "Google AdSense not configured (optional)"
         fi
     fi
 }
@@ -123,44 +136,53 @@ sync_env_to_vercel() {
         return 1
     fi
     
-    # Check if GA_MEASUREMENT_ID is set
+    # Sync Google Analytics
     if grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID=G-" .env.local; then
         GA_ID=$(grep "NEXT_PUBLIC_GA_MEASUREMENT_ID" .env.local | cut -d'=' -f2 | tr -d '"' | tr -d ' ')
         
         if [[ $GA_ID == *"XXXXXXXXXX"* ]]; then
             print_warning "Google Analytics ID is placeholder. Skipping..."
-            return 1
-        fi
-        
-        # Check if already set in Vercel
-        if npx vercel env ls 2>&1 | grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID"; then
-            print_info "NEXT_PUBLIC_GA_MEASUREMENT_ID already exists in Vercel"
-            read -p "Do you want to update it? (y/n) " -n 1 -r
-            echo
-            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-                print_info "Keeping existing value"
-                return 0
+        else
+            # Check if already set in Vercel
+            if npx vercel env ls 2>&1 | grep -q "NEXT_PUBLIC_GA_MEASUREMENT_ID"; then
+                print_info "NEXT_PUBLIC_GA_MEASUREMENT_ID already exists in Vercel"
+            else
+                # Add to all environments
+                print_info "Adding NEXT_PUBLIC_GA_MEASUREMENT_ID to Vercel..."
+                echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID production
+                echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID preview  
+                echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID development
+                print_success "Google Analytics ID synced!"
             fi
-            
-            # Remove existing
-            print_info "Removing old value..."
-            npx vercel env rm NEXT_PUBLIC_GA_MEASUREMENT_ID production -y 2>/dev/null || true
-            npx vercel env rm NEXT_PUBLIC_GA_MEASUREMENT_ID preview -y 2>/dev/null || true
-            npx vercel env rm NEXT_PUBLIC_GA_MEASUREMENT_ID development -y 2>/dev/null || true
         fi
-        
-        # Add to all environments
-        print_info "Adding NEXT_PUBLIC_GA_MEASUREMENT_ID to Vercel..."
-        echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID production
-        echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID preview  
-        echo "$GA_ID" | npx vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID development
-        
-        print_success "Environment variables synced to Vercel!"
-        return 0
     else
         print_warning "NEXT_PUBLIC_GA_MEASUREMENT_ID not found in .env.local"
-        return 1
     fi
+    
+    # Sync Google AdSense
+    if grep -q "NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-" .env.local; then
+        ADSENSE_ID=$(grep "NEXT_PUBLIC_ADSENSE_CLIENT_ID" .env.local | cut -d'=' -f2 | tr -d '"' | tr -d ' ')
+        
+        if [[ $ADSENSE_ID == *"XXXXXXXXXXXXXXXX"* ]]; then
+            print_warning "AdSense Client ID is placeholder. Skipping..."
+        else
+            # Check if already set in Vercel
+            if npx vercel env ls 2>&1 | grep -q "NEXT_PUBLIC_ADSENSE_CLIENT_ID"; then
+                print_info "NEXT_PUBLIC_ADSENSE_CLIENT_ID already exists in Vercel"
+            else
+                # Add to all environments
+                print_info "Adding NEXT_PUBLIC_ADSENSE_CLIENT_ID to Vercel..."
+                echo "$ADSENSE_ID" | npx vercel env add NEXT_PUBLIC_ADSENSE_CLIENT_ID production
+                echo "$ADSENSE_ID" | npx vercel env add NEXT_PUBLIC_ADSENSE_CLIENT_ID preview  
+                echo "$ADSENSE_ID" | npx vercel env add NEXT_PUBLIC_ADSENSE_CLIENT_ID development
+                print_success "AdSense Client ID synced!"
+            fi
+        fi
+    else
+        print_info "AdSense not configured (optional)"
+    fi
+    
+    print_success "Environment variables sync complete!"
 }
 
 # Deploy to Vercel (production)
