@@ -206,7 +206,7 @@ deploy_production() {
     npx vercel --prod
     
     print_success "Deployment complete!"
-    print_info "Visit: https://financialcalc.vercel.app"
+    print_info "Visit: https://calculators.utltyhub.com"
 }
 
 # Deploy to Vercel (preview)
@@ -234,7 +234,7 @@ check_status() {
 verify_production() {
     print_header "Verifying Production Deployment"
     
-    PROD_URL="https://financialcalc.vercel.app"
+    PROD_URL="https://calculators.utltyhub.com"
     
     print_info "Testing $PROD_URL..."
     

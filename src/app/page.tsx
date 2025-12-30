@@ -99,10 +99,10 @@ export default function Home() {
             '@type': 'WebSite',
             name: 'Financial Calculators',
             description: 'Free financial calculators for retirement, mortgage, tax, and investment planning',
-            url: 'https://financialcalculators.com',
+            url: 'https://calculators.utltyhub.com',
             potentialAction: {
               '@type': 'SearchAction',
-              target: 'https://financialcalculators.com/search?q={search_term_string}',
+              target: 'https://calculators.utltyhub.com/search?q={search_term_string}',
               'query-input': 'required name=search_term_string',
             },
           }),
@@ -116,7 +116,7 @@ export default function Home() {
             '@type': 'Organization',
             name: 'Financial Calculators',
             description: 'Free online financial planning tools and calculators',
-            url: 'https://financialcalculators.com',
+            url: 'https://calculators.utltyhub.com',
           }),
         }}
       />

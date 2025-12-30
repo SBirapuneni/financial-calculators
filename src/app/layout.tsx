@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Financial Calculators" }],
   creator: "Financial Calculators",
   publisher: "Financial Calculators",
-  metadataBase: new URL('https://financialcalculators.com'),
+  metadataBase: new URL('https://calculators.utltyhub.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://financialcalculators.com',
+    url: 'https://calculators.utltyhub.com',
     title: 'Free Financial Calculators',
     description: 'Plan your financial future with free calculators',
     siteName: 'Financial Calculators',

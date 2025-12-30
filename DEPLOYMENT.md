@@ -104,7 +104,7 @@ npm run deploy
 1. Checks for uncommitted changes
 2. Prompts to commit and push if needed
 3. Verifies Vercel environment variables
-4. Deploys to production (https://financialcalc.vercel.app)
+4. Deploys to production (https://calculators.utltyhub.com)
 5. Auto-assigns production domain
 
 ### Deploy to Preview
@@ -353,7 +353,7 @@ git push origin main
 
 ## Production URLs
 
-- **Production**: https://financialcalc.vercel.app
+- **Production**: https://calculators.utltyhub.com
 - **Preview**: Unique URL for each deployment
 - **Custom Domain**: Can be added in Vercel dashboard
 
