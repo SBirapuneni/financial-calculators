@@ -1,28 +1,51 @@
 'use client';
 
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateLoanPayoff, LoanPayoffResult } from '@/lib/calculations/loan-payoff';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+const formSchema = z.object({
+  currentBalance: z.number().min(0, 'Balance cannot be negative'),
+  annualRate: z.number().min(0).max(30, 'Rate must be between 0 and 30'),
+  minimumPayment: z.number().min(0, 'Payment cannot be negative'),
+  extraPayment: z.number().min(0, 'Extra payment cannot be negative'),
+});
+
+type FormData = z.infer<typeof formSchema>;
+
 export default function LoanPayoffCalculator() {
-  const [currentBalance, setCurrentBalance] = useState<number>(50000);
-  const [annualRate, setAnnualRate] = useState<number>(6.5);
-  const [minimumPayment, setMinimumPayment] = useState<number>(500);
-  const [extraPayment, setExtraPayment] = useState<number>(100);
   const [result, setResult] = useState<LoanPayoffResult | null>(null);
 
-  const handleCalculate = () => {
-    const calculation = calculateLoanPayoff({
-      currentBalance,
-      annualRate,
-      minimumPayment,
-      extraPayment,
-    });
+  const urlDefaults = useUrlParams({
+    currentBalance: 50000,
+    annualRate: 6.5,
+    minimumPayment: 500,
+    extraPayment: 100,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: urlDefaults,
+  });
+
+  const onSubmit = (data: FormData) => {
+    const calculation = calculateLoanPayoff(data);
     setResult(calculation);
   };
 
@@ -42,87 +65,100 @@ export default function LoanPayoffCalculator() {
           Loan Payoff Calculator
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Label htmlFor="currentBalance">Current Loan Balance ($)</Label>
-              <InfoTooltip content="Remaining loan balance to be paid off">
-                <span className="text-gray-400 cursor-help">ⓘ</span>
-              </InfoTooltip>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Label htmlFor="currentBalance">Current Loan Balance ($)</Label>
+                <InfoTooltip content="Remaining loan balance to be paid off">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
+              <Input
+                id="currentBalance"
+                type="number"
+                step="100"
+                {...register('currentBalance', { valueAsNumber: true })}
+              />
+              {errors.currentBalance && (
+                <p className="text-sm text-red-500 mt-1">{errors.currentBalance.message}</p>
+              )}
+              <InputHint example="$50,000" />
             </div>
-            <Input
-              id="currentBalance"
-              type="number"
-              value={currentBalance}
-              onChange={(e) => setCurrentBalance(Number(e.target.value))}
-              min="0"
-            />
-            <InputHint example="$50,000" />
+
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Label htmlFor="annualRate">Annual Interest Rate (%)</Label>
+                <InfoTooltip content="Current interest rate on your loan">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
+              <Input
+                id="annualRate"
+                type="number"
+                step="0.1"
+                {...register('annualRate', { valueAsNumber: true })}
+              />
+              {errors.annualRate && (
+                <p className="text-sm text-red-500 mt-1">{errors.annualRate.message}</p>
+              )}
+              <InputHint typical="4% - 10%" example="6.5%" />
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Label htmlFor="minimumPayment">Minimum Monthly Payment ($)</Label>
+                <InfoTooltip content="Required monthly payment amount">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
+              <Input
+                id="minimumPayment"
+                type="number"
+                step="10"
+                {...register('minimumPayment', { valueAsNumber: true })}
+              />
+              {errors.minimumPayment && (
+                <p className="text-sm text-red-500 mt-1">{errors.minimumPayment.message}</p>
+              )}
+              <InputHint example="$500" />
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Label htmlFor="extraPayment">Extra Monthly Payment ($)</Label>
+                <InfoTooltip content="Additional payment to reduce principal faster">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
+              <Input
+                id="extraPayment"
+                type="number"
+                step="10"
+                {...register('extraPayment', { valueAsNumber: true })}
+              />
+              {errors.extraPayment && (
+                <p className="text-sm text-red-500 mt-1">{errors.extraPayment.message}</p>
+              )}
+              <InputHint example="$100" />
+            </div>
           </div>
 
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Label htmlFor="rate">Annual Interest Rate (%)</Label>
-              <InfoTooltip content="Current interest rate on your loan">
-                <span className="text-gray-400 cursor-help">ⓘ</span>
-              </InfoTooltip>
-            </div>
-            <Input
-              id="rate"
-              type="number"
-              value={annualRate}
-              onChange={(e) => setAnnualRate(Number(e.target.value))}
-              step="0.1"
-              min="0"
-            />
-            <InputHint typical="4% - 10%" example="6.5%" />
-          </div>
-
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Label htmlFor="minimumPayment">Minimum Monthly Payment ($)</Label>
-              <InfoTooltip content="Required monthly payment amount">
-                <span className="text-gray-400 cursor-help">ⓘ</span>
-              </InfoTooltip>
-            </div>
-            <Input
-              id="minimumPayment"
-              type="number"
-              value={minimumPayment}
-              onChange={(e) => setMinimumPayment(Number(e.target.value))}
-              min="0"
-            />
-            <InputHint example="$500" />
-          </div>
-
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Label htmlFor="extraPayment">Extra Monthly Payment ($)</Label>
-              <InfoTooltip content="Additional payment to reduce principal faster">
-                <span className="text-gray-400 cursor-help">ⓘ</span>
-              </InfoTooltip>
-            </div>
-            <Input
-              id="extraPayment"
-              type="number"
-              value={extraPayment}
-              onChange={(e) => setExtraPayment(Number(e.target.value))}
-              min="0"
-            />
-            <InputHint example="$100" />
-          </div>
-        </div>
-
-        <button
-          onClick={handleCalculate}
-          className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Calculate Payoff
-        </button>
+          <Button type="submit" className="w-full">
+            Calculate Payoff
+          </Button>
+        </form>
       </Card>
 
       {result && (
         <>
+          <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold">Payoff Summary</h3>
+              <SaveShareUrl values={watch()} />
+            </div>
+          </Card>
+
           <div className="grid md:grid-cols-4 gap-6">
             <Card className="p-6">
               <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
