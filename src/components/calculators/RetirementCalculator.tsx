@@ -243,11 +243,12 @@ export default function RetirementCalculator() {
 
       {/* Chart */}
       {result && result.yearlyBreakdown.length > 0 && (
-        <Card className="p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-            Retirement Savings Growth
-          </h2>
-          <ResponsiveContainer width="100%" height={400}>
+        <>
+          <Card className="p-6">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Retirement Savings Growth
+            </h2>
+            <ResponsiveContainer width="100%" height={400}>
             <AreaChart data={result.yearlyBreakdown}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -290,25 +291,26 @@ export default function RetirementCalculator() {
           </ResponsiveContainer>
         </Card>
 
-        {/* Disclaimer */}
-        <Card className="p-6 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
-          <h3 className="text-lg font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
-            ⚠️ Important Disclaimer
-          </h3>
-          <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-2">
-            This calculator provides estimates based on assumptions and should not be considered financial advice. 
-            Actual investment returns vary and are not guaranteed. The calculator assumes:
-          </p>
-          <ul className="text-sm text-yellow-800 dark:text-yellow-200 list-disc list-inside space-y-1">
-            <li>Conservative returns during retirement (60% of accumulation rate)</li>
-            <li>Constant inflation rate (actual inflation varies)</li>
-            <li>No major market corrections or emergencies</li>
-            <li>Regular monthly contributions without interruption</li>
-          </ul>
-          <p className="text-sm text-yellow-800 dark:text-yellow-200 mt-2">
-            Please consult a qualified financial advisor for personalized retirement planning.
-          </p>
-        </Card>
+          {/* Disclaimer */}
+          <Card className="p-6 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+            <h3 className="text-lg font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
+              ⚠️ Important Disclaimer
+            </h3>
+            <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-2">
+              This calculator provides estimates based on assumptions and should not be considered financial advice. 
+              Actual investment returns vary and are not guaranteed. The calculator assumes:
+            </p>
+            <ul className="text-sm text-yellow-800 dark:text-yellow-200 list-disc list-inside space-y-1">
+              <li>Conservative returns during retirement (60% of accumulation rate)</li>
+              <li>Constant inflation rate (actual inflation varies)</li>
+              <li>No major market corrections or emergencies</li>
+              <li>Regular monthly contributions without interruption</li>
+            </ul>
+            <p className="text-sm text-yellow-800 dark:text-yellow-200 mt-2">
+              Please consult a qualified financial advisor for personalized retirement planning.
+            </p>
+          </Card>
+        </>
       )}
     </div>
   );
