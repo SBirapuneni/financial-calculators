@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
-import { ShareExport } from '@/components/shared/ShareExport';
+import ExportButton from '@/components/shared/ExportButton';
 import PrintButton from '@/components/shared/PrintButton';
 import { calculateLoanPayoff, LoanPayoffResult } from '@/lib/calculations/loan-payoff';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -168,7 +168,7 @@ export default function LoanPayoffCalculator() {
                 </h2>
                 <div className="flex gap-2">
                   <SaveShareUrl params={watch()} calculatorName="Loan Payoff Calculator" />
-                  <ShareExport calculatorName="Loan Payoff Calculator" resultData={result} />
+                  <ExportButton calculatorName="Loan Payoff Calculator" resultData={result} />
                   <PrintButton />
                 </div>
               </div>

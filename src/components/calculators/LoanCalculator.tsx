@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
-import { ShareExport } from '@/components/shared/ShareExport';
+import ExportButton from '@/components/shared/ExportButton';
 import PrintButton from '@/components/shared/PrintButton';
 import { calculateLoan, LoanResult } from '@/lib/calculations/loan';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
@@ -168,7 +168,7 @@ export default function LoanCalculator() {
                 </h2>
                 <div className="flex gap-2">
                   <SaveShareUrl params={watch()} calculatorName="Loan Calculator" />
-                  <ShareExport calculatorName="Loan Calculator" resultData={result} />
+                  <ExportButton calculatorName="Loan Calculator" resultData={result} />
                   <PrintButton />
                 </div>
               </div>

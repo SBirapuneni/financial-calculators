@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
-import { ShareExport } from '@/components/shared/ShareExport';
+import ExportButton from '@/components/shared/ExportButton';
 import PrintButton from '@/components/shared/PrintButton';
 import { calculateRetirement, RetirementResult } from '@/lib/calculations/retirement';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
@@ -236,7 +236,7 @@ export default function RetirementCalculator() {
                 </h2>
                 <div className="flex gap-2">
                   <SaveShareUrl params={watch()} calculatorName="Retirement Calculator" />
-                  <ShareExport calculatorName="Retirement Calculator" resultData={result} />
+                  <ExportButton calculatorName="Retirement Calculator" resultData={result} />
                   <PrintButton />
                 </div>
               </div>

@@ -12,7 +12,7 @@ import { Select } from '@/components/ui/select';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
-import { ShareExport } from '@/components/shared/ShareExport';
+import ExportButton from '@/components/shared/ExportButton';
 import PrintButton from '@/components/shared/PrintButton';
 import { calculateCompoundInterest, CompoundInterestResult } from '@/lib/calculations/compound-interest';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -165,7 +165,7 @@ export default function CompoundInterestCalculator() {
                 </h2>
                 <div className="flex gap-2">
                   <SaveShareUrl params={watch()} calculatorName="Compound Interest Calculator" />
-                  <ShareExport calculatorName="Compound Interest Calculator" resultData={result} />
+                  <ExportButton calculatorName="Compound Interest Calculator" resultData={result} />
                   <PrintButton />
                 </div>
               </div>

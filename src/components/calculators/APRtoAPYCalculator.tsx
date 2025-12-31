@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
-import { ShareExport } from '@/components/shared/ShareExport';
+import ExportButton from '@/components/shared/ExportButton';
 import PrintButton from '@/components/shared/PrintButton';
 import { aprToApy, apyToApr, getCompoundingPeriods } from '@/lib/calculations/apr-apy';
 import { ArrowRightLeft } from 'lucide-react';
@@ -159,7 +159,7 @@ export default function APRtoAPYCalculator() {
                 </h2>
                 <div className="flex gap-2">
                   <SaveShareUrl params={watch()} calculatorName="APR to APY Calculator" />
-                  <ShareExport calculatorName="APR to APY Calculator" resultData={result} />
+                  <ExportButton calculatorName="APR to APY Calculator" resultData={result} />
                   <PrintButton />
                 </div>
               </div>

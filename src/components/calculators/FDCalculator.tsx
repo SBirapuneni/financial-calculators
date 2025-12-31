@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
-import { ShareExport } from '@/components/shared/ShareExport';
+import ExportButton from '@/components/shared/ExportButton';
 import PrintButton from '@/components/shared/PrintButton';
 import { calculateFD, calculateSimpleFD, FDResult } from '@/lib/calculations/fd';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
@@ -193,7 +193,7 @@ export default function FDCalculator() {
                 </h2>
                 <div className="flex gap-2">
                   <SaveShareUrl params={watch()} calculatorName="Fixed Deposit Calculator" />
-                  <ShareExport calculatorName="Fixed Deposit Calculator" resultData={result} />
+                  <ExportButton calculatorName="Fixed Deposit Calculator" resultData={result} />
                   <PrintButton />
                 </div>
               </div>
