@@ -11,7 +11,7 @@ type CompoundingFrequency = 'monthly' | 'quarterly' | 'half-yearly' | 'yearly';
 
 export default function FDCalculator() {
   const [principal, setPrincipal] = useState<number>(100000);
-  const [annualRate, setAnnualRate] = useState<number>(7.0);
+  const [annualRate, setAnnualRate] = useState<number>(4.5);
   const [tenureMonths, setTenureMonths] = useState<number>(12);
   const [frequency, setFrequency] = useState<CompoundingFrequency>('quarterly');
   const [result, setResult] = useState<FDResult | null>(null);
@@ -254,6 +254,14 @@ export default function FDCalculator() {
             </div>
             <p className="text-blue-800 dark:text-blue-200 mt-3">
               You earn <strong>${(result.maturityAmount - simpleInterestAmount).toLocaleString()}</strong> more with compound interest!
+            </p>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mt-4">
+            <p className="text-sm text-blue-800 dark:text-blue-200">
+              <strong>Note:</strong> Interest rates shown are examples. Actual CD/Fixed Deposit rates vary by institution and market conditions. 
+              Always verify current rates with your financial institution.
             </p>
           </div>
         </>

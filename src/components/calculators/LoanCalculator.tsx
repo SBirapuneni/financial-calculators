@@ -284,6 +284,14 @@ export default function LoanCalculator() {
               </LineChart>
             </ResponsiveContainer>
           </Card>
+
+          {/* Disclaimer */}
+          <Card className="p-6 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+            <p className="text-sm text-blue-800 dark:text-blue-200">
+              <strong>Note:</strong> This calculator provides estimates for educational purposes. 
+              Actual loan terms and rates depend on creditworthiness, lender policies, and market conditions.
+            </p>
+          </Card>
         </>
       )}
     </div>

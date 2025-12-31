@@ -75,16 +75,26 @@ export function calculateRetirement(input: RetirementInput): RetirementResult {
   const monthlyIncomeAtRetirement =
     desiredMonthlyIncome * Math.pow(1 + monthlyInflation, monthsToRetirement);
 
-  // Calculate how long the corpus will last (assuming 4% withdrawal rate adjusted for inflation)
-  const withdrawalRate = 0.04 / 12;
+  // Calculate how long the corpus will last
+  // Using more conservative return during retirement (typically 4-6% vs 8% during accumulation)
+  const retirementReturnRate = Math.min(expectedReturn * 0.6, 5); // 60% of accumulation rate, max 5%
+  const monthlyRetirementRate = retirementReturnRate / 100 / 12;
+  
   let remainingCorpus = retirementCorpus;
   let monthsLasting = 0;
   const maxMonths = 40 * 12; // Cap at 40 years
 
   while (remainingCorpus > 0 && monthsLasting < maxMonths) {
+    // Withdraw inflation-adjusted amount
     const withdrawal = monthlyIncomeAtRetirement * Math.pow(1 + monthlyInflation, monthsLasting);
-    remainingCorpus = remainingCorpus * (1 + monthlyRate) - withdrawal;
+    // Apply retirement rate of return on remaining corpus, then subtract withdrawal
+    remainingCorpus = remainingCorpus * (1 + monthlyRetirementRate) - withdrawal;
     monthsLasting++;
+    
+    // Safety check to prevent infinite loop
+    if (withdrawal > remainingCorpus * (1 + monthlyRetirementRate) * 2) {
+      break; // Withdrawals are too high relative to corpus
+    }
   }
 
   const corpusLastsUntilAge = retirementAge + Math.floor(monthsLasting / 12);

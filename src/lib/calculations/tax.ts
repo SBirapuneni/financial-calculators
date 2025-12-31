@@ -3,7 +3,7 @@ export interface TaxInput {
   filingStatus: 'single' | 'married-joint' | 'married-separate' | 'head-of-household';
   deductions: number;
   credits: number;
-  state?: string; // For state tax calculation
+  stateTaxRate: number; // State tax rate percentage (0 for no state tax)
 }
 
 export interface TaxBracket {
@@ -79,7 +79,7 @@ const STANDARD_DEDUCTION_2025 = {
  * Calculate federal income tax
  */
 export function calculateTax(input: TaxInput): TaxResult {
-  const { annualIncome, filingStatus, deductions, credits } = input;
+  const { annualIncome, filingStatus, deductions, credits, stateTaxRate } = input;
 
   const standardDeduction = STANDARD_DEDUCTION_2025[filingStatus];
   const totalDeductions = Math.max(deductions, standardDeduction);
@@ -120,11 +120,17 @@ export function calculateTax(input: TaxInput): TaxResult {
   const socialSecurityWageBase = 168600; // 2025 limit
   const socialSecurityTax = Math.min(annualIncome, socialSecurityWageBase) * 0.062;
   const medicareTax = annualIncome * 0.0145;
-  const additionalMedicareTax = annualIncome > 200000 ? (annualIncome - 200000) * 0.009 : 0;
+  
+  // Additional Medicare tax threshold varies by filing status
+  const additionalMedicareThreshold = 
+    filingStatus === 'married-joint' ? 250000 : 
+    filingStatus === 'married-separate' ? 125000 : 200000;
+  const additionalMedicareTax = annualIncome > additionalMedicareThreshold 
+    ? (annualIncome - additionalMedicareThreshold) * 0.009 : 0;
   const ficaTax = socialSecurityTax + medicareTax + additionalMedicareTax;
 
-  // State tax (simplified - using 5% flat rate as example)
-  const stateTax = annualIncome * 0.05;
+  // State tax (use provided rate)
+  const stateTax = annualIncome * (input.stateTaxRate / 100);
 
   const totalTax = federalTax + ficaTax + stateTax;
   const effectiveRate = (totalTax / annualIncome) * 100;

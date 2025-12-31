@@ -15,6 +15,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Ba
 const formSchema = z.object({
   annualIncome: z.number().min(1, 'Income must be greater than 0'),
   filingStatus: z.enum(['single', 'married-joint', 'married-separate', 'head-of-household']),
+  stateTaxRate: z.number().min(0).max(15, 'State tax rate must be between 0 and 15'),
   deductions: z.number().min(0, 'Deductions cannot be negative'),
   credits: z.number().min(0, 'Credits cannot be negative'),
 });
@@ -33,6 +34,7 @@ export default function TaxCalculator() {
     defaultValues: {
       annualIncome: 75000,
       filingStatus: 'single',
+      stateTaxRate: 5,
       deductions: 0,
       credits: 0,
     },
@@ -103,6 +105,22 @@ export default function TaxCalculator() {
                 <option value="married-separate">Married Filing Separately</option>
                 <option value="head-of-household">Head of Household</option>
               </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="stateTaxRate">State Tax Rate (%)</Label>
+              <Input
+                id="stateTaxRate"
+                type="number"
+                step="0.5"
+                {...register('stateTaxRate', { valueAsNumber: true })}
+              />
+              {errors.stateTaxRate && (
+                <p className="text-sm text-red-500">{errors.stateTaxRate.message}</p>
+              )}
+              <p className="text-sm text-gray-500">
+                Enter 0 if your state has no income tax (e.g., TX, FL, WA)
+              </p>
             </div>
 
             <div className="space-y-2">
@@ -299,6 +317,19 @@ export default function TaxCalculator() {
                 is your average tax rate across all income.
               </p>
             </div>
+          </Card>
+
+          {/* Disclaimer */}
+          <Card className="p-6 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+            <h3 className="text-lg font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
+              ⚠️ Important Disclaimer
+            </h3>
+            <p className="text-sm text-yellow-800 dark:text-yellow-200">
+              This calculator provides estimates only and should not be considered tax advice. 
+              Actual tax liability may vary based on specific circumstances, deductions, and credits. 
+              State tax rates vary significantly by state and income level. Please consult a qualified 
+              tax professional or use official IRS tools for accurate calculations.
+            </p>
           </Card>
         </>
       )}

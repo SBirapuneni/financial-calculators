@@ -339,6 +339,17 @@ export default function MortgageCalculator() {
               </LineChart>
             </ResponsiveContainer>
           </Card>
+
+          {/* Disclaimer */}
+          <Card className="p-6 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+            <h3 className="text-lg font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
+              ⚠️ Important Disclaimer
+            </h3>
+            <p className="text-sm text-yellow-800 dark:text-yellow-200">
+              This calculator provides estimates only. Actual mortgage terms, rates, and costs vary by lender and borrower qualifications. 
+              PMI, property taxes, and insurance rates are estimates. Please consult with a licensed mortgage professional for accurate quotes.
+            </p>
+          </Card>
         </>
       )}
     </div>
