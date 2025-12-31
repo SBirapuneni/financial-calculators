@@ -49,8 +49,10 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${measurementId}', {
-              page_path: window.location.pathname,
+              debug_mode: true,
+              send_page_view: true
             });
+            console.log('GA4 Initialized:', '${measurementId}');
           `,
         }}
       />
