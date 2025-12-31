@@ -143,7 +143,7 @@ export default function APRtoAPYCalculator() {
           <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-semibold">Conversion Result</h3>
-              <SaveShareUrl values={watch()} />
+              <SaveShareUrl params={watch()} calculatorName="APR to APY Calculator" />
             </div>
           </Card>
 
@@ -169,7 +169,7 @@ export default function APRtoAPYCalculator() {
                   {calculationType === 'apr-to-apy' ? 'APR (Nominal Rate)' : 'APY (Effective Rate)'}:
                 </span>
                 <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {inputRate.toFixed(4)}%
+                  {watch('inputRate').toFixed(4)}%
                 </span>
               </div>
               <div className="flex justify-between items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
@@ -183,7 +183,7 @@ export default function APRtoAPYCalculator() {
               <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <span className="font-medium text-gray-700 dark:text-gray-300">Difference:</span>
                 <span className="text-2xl font-bold text-green-600">
-                  {Math.abs(result.rate - inputRate).toFixed(4)}%
+                  {Math.abs(result.rate - watch('inputRate')).toFixed(4)}%
                 </span>
               </div>
             </div>
@@ -200,14 +200,14 @@ export default function APRtoAPYCalculator() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Compounding:</span>
-                <span className="font-semibold capitalize">{frequency.replace('-', ' ')}</span>
+                <span className="font-semibold capitalize">{watch('frequency').replace('-', ' ')}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">
-                  {calculationType === 'apr-to-apy' ? 'Using APR' : 'Using APY'} ({inputRate}%):
+                  {calculationType === 'apr-to-apy' ? 'Using APR' : 'Using APY'} ({watch('inputRate')}%):
                 </span>
                 <span className="font-semibold">
-                  ₹{(10000 * (1 + inputRate / 100)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  ₹{(10000 * (1 + watch('inputRate') / 100)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
               <div className="flex justify-between">

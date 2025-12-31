@@ -8,7 +8,6 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
@@ -155,7 +154,7 @@ export default function LoanPayoffCalculator() {
           <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-semibold">Payoff Summary</h3>
-              <SaveShareUrl values={watch()} />
+              <SaveShareUrl params={watch()} calculatorName="Loan Payoff Calculator" />
             </div>
           </Card>
 
@@ -226,23 +225,23 @@ export default function LoanPayoffCalculator() {
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Current Balance:</span>
-                <span className="font-semibold">${currentBalance.toLocaleString()}</span>
+                <span className="font-semibold">${watch('currentBalance').toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Interest Rate:</span>
-                <span className="font-semibold">{annualRate}% per year</span>
+                <span className="font-semibold">{watch('annualRate')}% per year</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Minimum Payment:</span>
-                <span className="font-semibold">${minimumPayment.toLocaleString()}/month</span>
+                <span className="font-semibold">${watch('minimumPayment').toLocaleString()}/month</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Extra Payment:</span>
-                <span className="font-semibold">${extraPayment.toLocaleString()}/month</span>
+                <span className="font-semibold">${watch('extraPayment').toLocaleString()}/month</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Total Monthly Payment:</span>
-                <span className="font-semibold text-blue-600">${(minimumPayment + extraPayment).toLocaleString()}/month</span>
+                <span className="font-semibold text-blue-600">${(watch('minimumPayment') + watch('extraPayment')).toLocaleString()}/month</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Payoff Time:</span>
@@ -264,7 +263,7 @@ export default function LoanPayoffCalculator() {
               💡 Impact of Extra Payments
             </h3>
             <p className="text-green-800 dark:text-green-200">
-              By paying an extra ${extraPayment.toLocaleString()} per month, you&apos;ll save{' '}
+              By paying an extra ${watch('extraPayment').toLocaleString()} per month, you&apos;ll save{' '}
               <strong>${result.interestSaved.toLocaleString()}</strong> in interest and pay off your loan{' '}
               <strong>{result.timeSaved} months</strong> ({Math.floor(result.timeSaved / 12)} years {result.timeSaved % 12} months) earlier!
             </p>

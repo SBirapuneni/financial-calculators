@@ -8,7 +8,6 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
@@ -255,11 +254,7 @@ export default function MortgageCalculator() {
                   Results
                 </h2>
                 <div className="flex gap-2 flex-wrap">
-                  <SaveShareUrl 
-                    params={watch()} 
-                    calculatorName="Mortgage Calculator" 
-                  />
-                  <ShareExport calculatorName="Mortgage Calculator" resultData={result} />
+                  <SaveShareUrl params={watch()} calculatorName="Mortgage Calculator" />
                 </div>
               </div>
               

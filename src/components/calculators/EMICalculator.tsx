@@ -145,7 +145,7 @@ export default function EMICalculator() {
           <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-semibold">EMI Summary</h3>
-              <SaveShareUrl values={watch()} />
+              <SaveShareUrl params={watch()} calculatorName="EMI Calculator" />
             </div>
           </Card>
 
@@ -239,11 +239,11 @@ export default function EMICalculator() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Interest Rate:</span>
-                <span className="font-semibold">{annualRate}% per year</span>
+                <span className="font-semibold">{formValues.annualRate}% per year</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Loan Tenure:</span>
-                <span className="font-semibold">{tenureYears} years ({tenureYears * 12} months)</span>
+                <span className="font-semibold">{formValues.tenureYears} years ({formValues.tenureYears * 12} months)</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Monthly EMI:</span>
