@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
+import { ShareExport } from '@/components/shared/ShareExport';
+import PrintButton from '@/components/shared/PrintButton';
 import { calculateMortgage, MortgageResult } from '@/lib/calculations/mortgage';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -253,7 +255,11 @@ export default function MortgageCalculator() {
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
-                <SaveShareUrl params={watch()} calculatorName="Mortgage Calculator" />
+                <div className="flex gap-2">
+                  <SaveShareUrl params={watch()} calculatorName="Mortgage Calculator" />
+                  <ShareExport calculatorName="Mortgage Calculator" resultData={result} />
+                  <PrintButton />
+                </div>
               </div>
               
               <div className="space-y-3">

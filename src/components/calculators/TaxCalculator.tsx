@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
+import { ShareExport } from '@/components/shared/ShareExport';
+import PrintButton from '@/components/shared/PrintButton';
 import { calculateTax, TaxResult } from '@/lib/calculations/tax';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -194,7 +196,11 @@ export default function TaxCalculator() {
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
-                <SaveShareUrl params={watch()} calculatorName="Tax Calculator" />
+                <div className="flex gap-2">
+                  <SaveShareUrl params={watch()} calculatorName="Tax Calculator" />
+                  <ShareExport calculatorName="Tax Calculator" resultData={result} />
+                  <PrintButton />
+                </div>
               </div>
               
               <div className="space-y-3">

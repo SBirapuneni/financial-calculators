@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
+import { ShareExport } from '@/components/shared/ShareExport';
+import PrintButton from '@/components/shared/PrintButton';
 import { calculateEMI, EMICalculation } from '@/lib/calculations/emi';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -155,7 +157,11 @@ export default function EMICalculator() {
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
-                <SaveShareUrl params={watch()} calculatorName="EMI Calculator" />
+                <div className="flex gap-2">
+                  <SaveShareUrl params={watch()} calculatorName="EMI Calculator" />
+                  <ShareExport calculatorName="EMI Calculator" resultData={result} />
+                  <PrintButton />
+                </div>
               </div>
               
               <div className="space-y-3">
