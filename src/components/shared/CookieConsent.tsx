@@ -25,7 +25,22 @@ export default function CookieConsent() {
       (window as any).gtag('consent', 'update', {
         analytics_storage: 'granted',
         ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
       });
+      console.log('GA4 Consent: Updated to granted');
+      
+      // Trigger a page view event after consent is granted
+      setTimeout(() => {
+        if ((window as any).gtag) {
+          (window as any).gtag('event', 'page_view', {
+            page_path: window.location.pathname,
+            page_title: document.title,
+            page_location: window.location.href,
+          });
+          console.log('GA4 Page View: Sent after consent');
+        }
+      }, 100);
     }
   };
 
@@ -38,7 +53,10 @@ export default function CookieConsent() {
       (window as any).gtag('consent', 'update', {
         analytics_storage: 'denied',
         ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
       });
+      console.log('GA4 Consent: Updated to denied');
     }
   };
 

@@ -19,9 +19,12 @@ function AnalyticsTracker({ measurementId }: { measurementId: string }) {
     
     // Track pageview on route change
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', measurementId, {
+      window.gtag('event', 'page_view', {
         page_path: url,
+        page_title: document.title,
+        page_location: window.location.href,
       });
+      console.log('GA4 Page View:', url);
     }
   }, [pathname, searchParams, measurementId]);
 
@@ -36,10 +39,46 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
 
   return (
     <>
+      {/* Google Consent Mode v2 - Set default to denied before any scripts load */}
+      <Script
+        id="google-consent-default"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            // Set default consent to denied (will be granted after user accepts)
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied',
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'wait_for_update': 500
+            });
+            
+            // Check if user has previously accepted cookies
+            const consent = localStorage.getItem('cookie-consent');
+            if (consent === 'accepted') {
+              gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
+              });
+              console.log('GA4 Consent: Granted from localStorage');
+            } else {
+              console.log('GA4 Consent: Waiting for user action');
+            }
+          `,
+        }}
+      />
+      
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
       />
+      
       <Script
         id="google-analytics"
         strategy="afterInteractive"
@@ -50,12 +89,14 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
             gtag('js', new Date());
             gtag('config', '${measurementId}', {
               debug_mode: true,
-              send_page_view: true
+              send_page_view: true,
+              cookie_flags: 'SameSite=None;Secure'
             });
             console.log('GA4 Initialized:', '${measurementId}');
           `,
         }}
       />
+      
       <Suspense fallback={null}>
         <AnalyticsTracker measurementId={measurementId} />
       </Suspense>
