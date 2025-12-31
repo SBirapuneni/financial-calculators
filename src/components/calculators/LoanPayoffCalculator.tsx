@@ -58,13 +58,20 @@ export default function LoanPayoffCalculator() {
     })) || [];
 
   return (
-    <div className="space-y-8">
-      <Card className="p-6">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+    <div className="w-full max-w-6xl mx-auto p-4 space-y-6">
+      <div className="text-center space-y-2">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
           Loan Payoff Calculator
-        </h2>
+        </h1>
+        <p className="text-lg text-gray-600 dark:text-gray-400">
+          Calculate how extra payments can help you pay off your loan faster
+        </p>
+      </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Input Form */}
+        <Card className="p-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -143,65 +150,73 @@ export default function LoanPayoffCalculator() {
             </div>
           </div>
 
-          <Button type="submit" className="w-full">
-            Calculate Payoff
-          </Button>
-        </form>
-      </Card>
+            <Button type="submit" className="w-full">
+              Calculate Payoff
+            </Button>
+          </form>
+        </Card>
+
+        {/* Results */}
+        <Card className="p-6">
+          {result ? (
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  Results
+                </h2>
+                <SaveShareUrl params={watch()} calculatorName="Loan Payoff Calculator" />
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <span className="text-gray-700 dark:text-gray-300">Time to Payoff</span>
+                  <div className="text-right">
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      {result.monthsToPayoff} months
+                    </span>
+                    <p className="text-sm text-gray-500">
+                      ({Math.floor(result.monthsToPayoff / 12)} years {result.monthsToPayoff % 12} months)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <span className="text-gray-700 dark:text-gray-300">Total Payment</span>
+                  <span className="text-xl font-semibold text-gray-900 dark:text-white">
+                    ${result.totalPayment.toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                  <span className="text-gray-700 dark:text-gray-300">Time Saved</span>
+                  <div className="text-right">
+                    <span className="text-xl font-semibold text-green-600 dark:text-green-400">
+                      {result.timeSaved} months
+                    </span>
+                    <p className="text-sm text-gray-500">
+                      ({Math.floor(result.timeSaved / 12)} years {result.timeSaved % 12} months)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                  <span className="text-gray-700 dark:text-gray-300">Interest Saved</span>
+                  <span className="text-xl font-semibold text-green-600 dark:text-green-400">
+                    ${result.interestSaved.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              <p>Enter loan details to calculate payoff schedule</p>
+            </div>
+          )}
+        </Card>
+      </div>
 
       {result && (
         <>
-          <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">Payoff Summary</h3>
-              <SaveShareUrl params={watch()} calculatorName="Loan Payoff Calculator" />
-            </div>
-          </Card>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            <Card className="p-6">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Time to Payoff
-              </h3>
-              <p className="text-3xl font-bold text-blue-600">
-                {result.monthsToPayoff} months
-              </p>
-              <p className="text-sm text-gray-500">
-                ({Math.floor(result.monthsToPayoff / 12)} years {result.monthsToPayoff % 12} months)
-              </p>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Total Payment
-              </h3>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                ${result.totalPayment.toLocaleString()}
-              </p>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Time Saved
-              </h3>
-              <p className="text-3xl font-bold text-green-600">
-                {result.timeSaved} months
-              </p>
-              <p className="text-sm text-gray-500">
-                ({Math.floor(result.timeSaved / 12)} years {result.timeSaved % 12} months)
-              </p>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Interest Saved
-              </h3>
-              <p className="text-3xl font-bold text-green-600">
-                ${result.interestSaved.toLocaleString()}
-              </p>
-            </Card>
-          </div>
-
           <Card className="p-6">
             <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
               Loan Balance Over Time

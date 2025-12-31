@@ -70,23 +70,33 @@ export default function APRtoAPYCalculator() {
   };
 
   return (
-    <div className="space-y-8">
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            {calculationType === 'apr-to-apy' ? 'APR to APY' : 'APY to APR'} Calculator
-          </h2>
-          <button
-            onClick={toggleCalculationType}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-          >
-            <ArrowRightLeft className="h-4 w-4" />
-            Switch
-          </button>
-        </div>
+    <div className="w-full max-w-6xl mx-auto p-4 space-y-6">
+      <div className="text-center space-y-2">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+          APR to APY Calculator
+        </h1>
+        <p className="text-lg text-gray-600 dark:text-gray-400">
+          Convert between Annual Percentage Rate (APR) and Annual Percentage Yield (APY)
+        </p>
+      </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-6">
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Input Form */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              {calculationType === 'apr-to-apy' ? 'APR to APY' : 'APY to APR'}
+            </h2>
+            <button
+              onClick={toggleCalculationType}
+              className="flex items-center gap-2 px-3 py-1.5 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm"
+            >
+              <ArrowRightLeft className="h-3.5 w-3.5" />
+              Switch
+            </button>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Label htmlFor="inputRate">
@@ -130,7 +140,6 @@ export default function APRtoAPYCalculator() {
                 <p className="text-sm text-red-500 mt-1">{errors.frequency.message}</p>
               )}
             </div>
-          </div>
 
           <Button type="submit" className="w-full">
             Calculate {calculationType === 'apr-to-apy' ? 'APY' : 'APR'}
@@ -138,27 +147,41 @@ export default function APRtoAPYCalculator() {
         </form>
       </Card>
 
+        {/* Results */}
+        <Card className="p-6">
+          {result ? (
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  Results
+                </h2>
+                <SaveShareUrl params={watch()} calculatorName="APR to APY Calculator" />
+              </div>
+              
+              <div className="space-y-3">
+                <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg">
+                  <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                    {calculationType === 'apr-to-apy' ? 'APY (Annual Percentage Yield)' : 'APR (Annual Percentage Rate)'}
+                  </h3>
+                  <p className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-4">
+                    {result.rate.toFixed(4)}%
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {result.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              <p>Enter values to calculate conversion</p>
+            </div>
+          )}
+        </Card>
+      </div>
+
       {result && (
         <>
-          <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">Conversion Result</h3>
-              <SaveShareUrl params={watch()} calculatorName="APR to APY Calculator" />
-            </div>
-          </Card>
-
-          <Card className="p-6">
-            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-              {calculationType === 'apr-to-apy' ? 'APY (Annual Percentage Yield)' : 'APR (Annual Percentage Rate)'}
-            </h3>
-            <p className="text-5xl font-bold text-blue-600 mb-4">
-              {result.rate.toFixed(4)}%
-            </p>
-            <p className="text-gray-700 dark:text-gray-300">
-              {result.description}
-            </p>
-          </Card>
-
           <Card className="p-6">
             <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
               Comparison

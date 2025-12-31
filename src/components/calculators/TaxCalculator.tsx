@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateTax, TaxResult } from '@/lib/calculations/tax';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -26,19 +27,22 @@ type FormData = z.infer<typeof formSchema>;
 export default function TaxCalculator() {
   const [result, setResult] = useState<TaxResult | null>(null);
 
+  const urlDefaults = useUrlParams({
+    annualIncome: 75000,
+    filingStatus: 'single' as const,
+    stateTaxRate: 5,
+    deductions: 0,
+    credits: 0,
+  });
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      annualIncome: 75000,
-      filingStatus: 'single',
-      stateTaxRate: 5,
-      deductions: 0,
-      credits: 0,
-    },
+    defaultValues: urlDefaults,
   });
 
   const onSubmit = (data: FormData) => {
@@ -190,6 +194,7 @@ export default function TaxCalculator() {
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
+                <SaveShareUrl params={watch()} calculatorName="Tax Calculator" />
               </div>
               
               <div className="space-y-3">

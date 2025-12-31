@@ -160,13 +160,11 @@ export default function LoanCalculator() {
         <Card className="p-6">
           {result ? (
             <div className="space-y-4">
-              <div className="flex justify-between items-center flex-wrap gap-2">
+              <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
-                <div className="flex gap-2 flex-wrap">
-                  <SaveShareUrl params={watch()} calculatorName="Loan Calculator" />
-                </div>
+                <SaveShareUrl params={watch()} calculatorName="Loan Calculator" />
               </div>
               
               <div className="space-y-3">
