@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   creator: "Financial Calculators",
   publisher: "Financial Calculators",
   metadataBase: new URL('https://calculators.utltyhub.com'),
+  verification: {
+    google: 'rYre4uVlZ8azo4swV3bFXUMSkDj_SutOl--QAjVLFzw',
+  },
   alternates: {
     canonical: '/',
   },
