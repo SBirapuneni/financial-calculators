@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateRetirement, RetirementResult } from '@/lib/calculations/retirement';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
@@ -29,6 +30,17 @@ type FormData = z.infer<typeof formSchema>;
 export default function RetirementCalculator() {
   const [result, setResult] = useState<RetirementResult | null>(null);
 
+  // Load values from URL parameters if available
+  const urlDefaults = useUrlParams({
+    currentAge: 30,
+    retirementAge: 65,
+    currentSavings: 50000,
+    monthlyContribution: 1000,
+    expectedReturn: 8,
+    inflationRate: 3,
+    desiredMonthlyIncome: 5000,
+  });
+
   const {
     register,
     handleSubmit,
@@ -36,15 +48,7 @@ export default function RetirementCalculator() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      currentAge: 30,
-      retirementAge: 65,
-      currentSavings: 50000,
-      monthlyContribution: 1000,
-      expectedReturn: 8,
-      inflationRate: 3,
-      desiredMonthlyIncome: 5000,
-    },
+    defaultValues: urlDefaults,
   });
 
   const onSubmit = (data: FormData) => {
@@ -225,11 +229,17 @@ export default function RetirementCalculator() {
         <Card className="p-6">
           {result ? (
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center flex-wrap gap-2">
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
-                <ShareExport calculatorName="Retirement Calculator" resultData={result} />
+                <div className="flex gap-2 flex-wrap">
+                  <SaveShareUrl 
+                    params={watch()} 
+                    calculatorName="Retirement Calculator" 
+                  />
+                  <ShareExport calculatorName="Retirement Calculator" resultData={result} />
+                </div>
               </div>
               
               <div className="space-y-3">

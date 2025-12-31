@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateMortgage, MortgageResult } from '@/lib/calculations/mortgage';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -29,6 +30,17 @@ type FormData = z.infer<typeof formSchema>;
 export default function MortgageCalculator() {
   const [result, setResult] = useState<MortgageResult | null>(null);
 
+  // Load values from URL parameters if available
+  const urlDefaults = useUrlParams({
+    homePrice: 400000,
+    downPayment: 80000,
+    loanTerm: 30,
+    interestRate: 6.5,
+    propertyTax: 4800,
+    homeInsurance: 1200,
+    hoa: 0,
+  });
+
   const {
     register,
     handleSubmit,
@@ -36,15 +48,7 @@ export default function MortgageCalculator() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      homePrice: 400000,
-      downPayment: 80000,
-      loanTerm: 30,
-      interestRate: 6.5,
-      propertyTax: 4800,
-      homeInsurance: 1200,
-      hoa: 0,
-    },
+    defaultValues: urlDefaults,
   });
 
   const onSubmit = (data: FormData) => {
@@ -246,11 +250,17 @@ export default function MortgageCalculator() {
         <Card className="p-6">
           {result ? (
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center flex-wrap gap-2">
                 <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Results
                 </h2>
-                <ShareExport calculatorName="Mortgage Calculator" resultData={result} />
+                <div className="flex gap-2 flex-wrap">
+                  <SaveShareUrl 
+                    params={watch()} 
+                    calculatorName="Mortgage Calculator" 
+                  />
+                  <ShareExport calculatorName="Mortgage Calculator" resultData={result} />
+                </div>
               </div>
               
               <div className="space-y-3">
