@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { calculateLoanPayoff, LoanPayoffResult } from '@/lib/calculations/loan-payoff';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -42,7 +44,12 @@ export default function LoanPayoffCalculator() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="currentBalance">Current Loan Balance ($)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="currentBalance">Current Loan Balance ($)</Label>
+              <InfoTooltip content="Remaining loan balance to be paid off">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="currentBalance"
               type="number"
@@ -50,10 +57,16 @@ export default function LoanPayoffCalculator() {
               onChange={(e) => setCurrentBalance(Number(e.target.value))}
               min="0"
             />
+            <InputHint example="$50,000" />
           </div>
 
           <div>
-            <Label htmlFor="rate">Annual Interest Rate (%)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="rate">Annual Interest Rate (%)</Label>
+              <InfoTooltip content="Current interest rate on your loan">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="rate"
               type="number"
@@ -62,10 +75,16 @@ export default function LoanPayoffCalculator() {
               step="0.1"
               min="0"
             />
+            <InputHint typical="4% - 10%" example="6.5%" />
           </div>
 
           <div>
-            <Label htmlFor="minimumPayment">Minimum Monthly Payment ($)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="minimumPayment">Minimum Monthly Payment ($)</Label>
+              <InfoTooltip content="Required monthly payment amount">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="minimumPayment"
               type="number"
@@ -73,10 +92,16 @@ export default function LoanPayoffCalculator() {
               onChange={(e) => setMinimumPayment(Number(e.target.value))}
               min="0"
             />
+            <InputHint example="$500" />
           </div>
 
           <div>
-            <Label htmlFor="extraPayment">Extra Monthly Payment ($)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="extraPayment">Extra Monthly Payment ($)</Label>
+              <InfoTooltip content="Additional payment to reduce principal faster">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="extraPayment"
               type="number"
@@ -84,6 +109,7 @@ export default function LoanPayoffCalculator() {
               onChange={(e) => setExtraPayment(Number(e.target.value))}
               min="0"
             />
+            <InputHint example="$100" />
           </div>
         </div>
 
@@ -209,6 +235,8 @@ export default function LoanPayoffCalculator() {
           </div>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="loan-payoff" />
     </div>
   );
 }

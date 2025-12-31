@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { calculateEMI, EMICalculation } from '@/lib/calculations/emi';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -46,7 +48,12 @@ export default function EMICalculator() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="principal">Loan Amount ($)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="principal">Loan Amount ($)</Label>
+              <InfoTooltip content="Total loan amount to be borrowed">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="principal"
               type="number"
@@ -54,10 +61,16 @@ export default function EMICalculator() {
               onChange={(e) => setPrincipal(Number(e.target.value))}
               min="0"
             />
+            <InputHint typical="$100,000 - $1,000,000" example="$500,000" />
           </div>
 
           <div>
-            <Label htmlFor="rate">Interest Rate (% per year)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="rate">Interest Rate (% per year)</Label>
+              <InfoTooltip content="Annual interest rate on the loan">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="rate"
               type="number"
@@ -66,10 +79,16 @@ export default function EMICalculator() {
               step="0.1"
               min="0"
             />
+            <InputHint typical="6% - 12%" example="8.5%" />
           </div>
 
           <div>
-            <Label htmlFor="tenure">Loan Tenure (Years)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="tenure">Loan Tenure (Years)</Label>
+              <InfoTooltip content="Loan repayment period in years">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="tenure"
               type="number"
@@ -77,6 +96,7 @@ export default function EMICalculator() {
               onChange={(e) => setTenureYears(Number(e.target.value))}
               min="1"
             />
+            <InputHint typical="10-30 years" example="20 years" />
           </div>
         </div>
 
@@ -202,6 +222,8 @@ export default function EMICalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="emi" />
     </div>
   );
 }

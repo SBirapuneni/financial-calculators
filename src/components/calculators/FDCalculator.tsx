@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { calculateFD, calculateSimpleFD, FDResult } from '@/lib/calculations/fd';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -53,7 +55,12 @@ export default function FDCalculator() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="principal">Deposit Amount ($)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="principal">Deposit Amount ($)</Label>
+              <InfoTooltip content="Initial amount to deposit in the fixed deposit">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="principal"
               type="number"
@@ -61,10 +68,16 @@ export default function FDCalculator() {
               onChange={(e) => setPrincipal(Number(e.target.value))}
               min="0"
             />
+            <InputHint typical="$10,000 - $500,000" example="$100,000" />
           </div>
 
           <div>
-            <Label htmlFor="rate">Annual Interest Rate (%)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="rate">Annual Interest Rate (%)</Label>
+              <InfoTooltip content="Interest rate offered on the fixed deposit">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="rate"
               type="number"
@@ -73,10 +86,16 @@ export default function FDCalculator() {
               step="0.1"
               min="0"
             />
+            <InputHint typical="3% - 6%" example="4.5%" />
           </div>
 
           <div>
-            <Label htmlFor="tenure">Tenure (Months)</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="tenure">Tenure (Months)</Label>
+              <InfoTooltip content="Lock-in period for the fixed deposit">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="tenure"
               type="number"
@@ -87,10 +106,16 @@ export default function FDCalculator() {
             <p className="text-sm text-gray-500 mt-1">
               {(tenureMonths / 12).toFixed(1)} years
             </p>
+            <InputHint typical="6-60 months" example="12 months" />
           </div>
 
           <div>
-            <Label htmlFor="frequency">Compounding Frequency</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="frequency">Compounding Frequency</Label>
+              <InfoTooltip content="How often interest is compounded">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <select
               id="frequency"
               value={frequency}
@@ -266,6 +291,8 @@ export default function FDCalculator() {
           </div>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="fd" />
     </div>
   );
 }

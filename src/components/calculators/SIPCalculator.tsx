@@ -8,6 +8,10 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { ShareExport } from '@/components/shared/ShareExport';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateSIP, SIPResult } from '@/lib/calculations/sip';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
@@ -22,6 +26,12 @@ type FormData = z.infer<typeof formSchema>;
 export default function SIPCalculator() {
   const [result, setResult] = useState<SIPResult | null>(null);
 
+  const urlDefaults = useUrlParams({
+    monthlyInvestment: 5000,
+    annualReturnRate: 12,
+    investmentYears: 10,
+  });
+
   const {
     register,
     handleSubmit,
@@ -29,11 +39,7 @@ export default function SIPCalculator() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      monthlyInvestment: 5000,
-      annualReturnRate: 12,
-      investmentYears: 10,
-    },
+    defaultValues: urlDefaults,
   });
 
   const onSubmit = (data: FormData) => {
@@ -64,7 +70,12 @@ export default function SIPCalculator() {
         <Card className="p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="monthlyInvestment">Monthly Investment ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="monthlyInvestment">Monthly Investment ($)</Label>
+                <InfoTooltip content="Amount you invest every month in the SIP">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="monthlyInvestment"
                 type="number"
@@ -74,10 +85,16 @@ export default function SIPCalculator() {
               {errors.monthlyInvestment && (
                 <p className="text-sm text-red-500">{errors.monthlyInvestment.message}</p>
               )}
+              <InputHint typical="$500 - $10,000" example="$5,000" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="annualReturnRate">Expected Annual Return (%)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="annualReturnRate">Expected Annual Return (%)</Label>
+                <InfoTooltip content="Expected average yearly return on your investment">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="annualReturnRate"
                 type="number"
@@ -87,10 +104,16 @@ export default function SIPCalculator() {
               {errors.annualReturnRate && (
                 <p className="text-sm text-red-500">{errors.annualReturnRate.message}</p>
               )}
+              <InputHint typical="8% - 15%" example="12%" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="investmentYears">Investment Period (Years)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="investmentYears">Investment Period (Years)</Label>
+                <InfoTooltip content="How long you plan to invest regularly">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="investmentYears"
                 type="number"
@@ -99,6 +122,7 @@ export default function SIPCalculator() {
               {errors.investmentYears && (
                 <p className="text-sm text-red-500">{errors.investmentYears.message}</p>
               )}
+              <InputHint typical="5-20 years" example="10 years" />
             </div>
 
             <Button type="submit" className="w-full">
@@ -111,9 +135,18 @@ export default function SIPCalculator() {
         <Card className="p-6">
           {result ? (
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Results
-              </h2>
+              <div className="flex justify-between items-center flex-wrap gap-2">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  Results
+                </h2>
+                <div className="flex gap-2 flex-wrap">
+                  <SaveShareUrl 
+                    params={watch()} 
+                    calculatorName="SIP Calculator" 
+                  />
+                  <ShareExport calculatorName="SIP Calculator" resultData={result} />
+                </div>
+              </div>
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
@@ -255,6 +288,8 @@ export default function SIPCalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="sip" />
     </div>
   );
 }

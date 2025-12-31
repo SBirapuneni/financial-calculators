@@ -8,6 +8,10 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { ShareExport } from '@/components/shared/ShareExport';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateLoan, LoanResult } from '@/lib/calculations/loan';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
@@ -22,6 +26,12 @@ type FormData = z.infer<typeof formSchema>;
 export default function LoanCalculator() {
   const [result, setResult] = useState<LoanResult | null>(null);
 
+  const urlDefaults = useUrlParams({
+    principal: 200000,
+    annualRate: 6.5,
+    termYears: 15,
+  });
+
   const {
     register,
     handleSubmit,
@@ -29,11 +39,7 @@ export default function LoanCalculator() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      principal: 200000,
-      annualRate: 6.5,
-      termYears: 15,
-    },
+    defaultValues: urlDefaults,
   });
 
   const onSubmit = (data: FormData) => {
@@ -90,7 +96,12 @@ export default function LoanCalculator() {
         <Card className="p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="principal">Loan Amount ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="principal">Loan Amount ($)</Label>
+                <InfoTooltip content="The total amount you want to borrow">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="principal"
                 type="number"
@@ -100,10 +111,16 @@ export default function LoanCalculator() {
               {errors.principal && (
                 <p className="text-sm text-red-500">{errors.principal.message}</p>
               )}
+              <InputHint typical="$50,000 - $500,000" example="$200,000" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="annualRate">Annual Interest Rate (%)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="annualRate">Annual Interest Rate (%)</Label>
+                <InfoTooltip content="The yearly interest rate charged on the loan">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="annualRate"
                 type="number"
@@ -113,10 +130,16 @@ export default function LoanCalculator() {
               {errors.annualRate && (
                 <p className="text-sm text-red-500">{errors.annualRate.message}</p>
               )}
+              <InputHint typical="4% - 12%" example="6.5%" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="termYears">Loan Term (Years)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="termYears">Loan Term (Years)</Label>
+                <InfoTooltip content="How long you have to repay the loan">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="termYears"
                 type="number"
@@ -125,6 +148,7 @@ export default function LoanCalculator() {
               {errors.termYears && (
                 <p className="text-sm text-red-500">{errors.termYears.message}</p>
               )}
+              <InputHint typical="10-30 years" example="15 years" />
             </div>
 
             <Button type="submit" className="w-full">
@@ -137,9 +161,18 @@ export default function LoanCalculator() {
         <Card className="p-6">
           {result ? (
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Results
-              </h2>
+              <div className="flex justify-between items-center flex-wrap gap-2">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  Results
+                </h2>
+                <div className="flex gap-2 flex-wrap">
+                  <SaveShareUrl 
+                    params={watch()} 
+                    calculatorName="Loan Calculator" 
+                  />
+                  <ShareExport calculatorName="Loan Calculator" resultData={result} />
+                </div>
+              </div>
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
@@ -294,6 +327,8 @@ export default function LoanCalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="loan" />
     </div>
   );
 }

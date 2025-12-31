@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { aprToApy, apyToApr, getCompoundingPeriods } from '@/lib/calculations/apr-apy';
 import { ArrowRightLeft } from 'lucide-react';
 
@@ -56,9 +58,14 @@ export default function APRtoAPYCalculator() {
 
         <div className="space-y-6 mb-6">
           <div>
-            <Label htmlFor="inputRate">
-              {calculationType === 'apr-to-apy' ? 'APR (Annual Percentage Rate)' : 'APY (Annual Percentage Yield)'} (%)
-            </Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="inputRate">
+                {calculationType === 'apr-to-apy' ? 'APR (Annual Percentage Rate)' : 'APY (Annual Percentage Yield)'} (%)
+              </Label>
+              <InfoTooltip content={calculationType === 'apr-to-apy' ? 'Nominal annual rate without compounding' : 'Effective annual rate with compounding'}>
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <Input
               id="inputRate"
               type="number"
@@ -67,10 +74,16 @@ export default function APRtoAPYCalculator() {
               step="0.01"
               min="0"
             />
+            <InputHint typical="1% - 10%" example="5.0%" />
           </div>
 
           <div>
-            <Label htmlFor="frequency">Compounding Frequency</Label>
+            <div className="flex items-center gap-2 mb-2">
+              <Label htmlFor="frequency">Compounding Frequency</Label>
+              <InfoTooltip content="How often interest is compounded per year">
+                <span className="text-gray-400 cursor-help">ⓘ</span>
+              </InfoTooltip>
+            </div>
             <select
               id="frequency"
               value={frequency}
@@ -171,6 +184,8 @@ export default function APRtoAPYCalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="apr-apy" />
     </div>
   );
 }

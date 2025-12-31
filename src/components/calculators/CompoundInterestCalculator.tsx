@@ -9,6 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/select';
+import { ShareExport } from '@/components/shared/ShareExport';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
+import { SaveShareUrl, useUrlParams } from '@/components/shared/SaveShareUrl';
 import { calculateCompoundInterest, CompoundInterestResult } from '@/lib/calculations/compound-interest';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -24,6 +28,13 @@ type FormData = z.infer<typeof formSchema>;
 export default function CompoundInterestCalculator() {
   const [result, setResult] = useState<CompoundInterestResult | null>(null);
 
+  const urlDefaults = useUrlParams({
+    principal: 10000,
+    annualRate: 8,
+    years: 10,
+    compoundingFrequency: 'yearly' as const,
+  });
+
   const {
     register,
     handleSubmit,
@@ -32,12 +43,7 @@ export default function CompoundInterestCalculator() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      principal: 10000,
-      annualRate: 8,
-      years: 10,
-      compoundingFrequency: 'yearly',
-    },
+    defaultValues: urlDefaults,
   });
 
   const onSubmit = (data: FormData) => {
@@ -68,7 +74,12 @@ export default function CompoundInterestCalculator() {
         <Card className="p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="principal">Initial Investment ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="principal">Initial Investment ($)</Label>
+                <InfoTooltip content="The starting amount you invest">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="principal"
                 type="number"
@@ -78,10 +89,16 @@ export default function CompoundInterestCalculator() {
               {errors.principal && (
                 <p className="text-sm text-red-500">{errors.principal.message}</p>
               )}
+              <InputHint typical="$1,000 - $100,000" example="$10,000" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="annualRate">Annual Interest Rate (%)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="annualRate">Annual Interest Rate (%)</Label>
+                <InfoTooltip content="The yearly interest rate earned">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="annualRate"
                 type="number"
@@ -91,10 +108,16 @@ export default function CompoundInterestCalculator() {
               {errors.annualRate && (
                 <p className="text-sm text-red-500">{errors.annualRate.message}</p>
               )}
+              <InputHint typical="3% - 12%" example="8%" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="years">Investment Period (Years)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="years">Investment Period (Years)</Label>
+                <InfoTooltip content="How long your money will be invested">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="years"
                 type="number"
@@ -103,10 +126,16 @@ export default function CompoundInterestCalculator() {
               {errors.years && (
                 <p className="text-sm text-red-500">{errors.years.message}</p>
               )}
+              <InputHint typical="5-30 years" example="10 years" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="compoundingFrequency">Compounding Frequency</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="compoundingFrequency">Compounding Frequency</Label>
+                <InfoTooltip content="How often interest is calculated and added">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <select
                 id="compoundingFrequency"
                 {...register('compoundingFrequency')}
@@ -129,9 +158,18 @@ export default function CompoundInterestCalculator() {
         <Card className="p-6">
           {result ? (
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Results
-              </h2>
+              <div className="flex justify-between items-center flex-wrap gap-2">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  Results
+                </h2>
+                <div className="flex gap-2 flex-wrap">
+                  <SaveShareUrl 
+                    params={watch()} 
+                    calculatorName="Compound Interest Calculator" 
+                  />
+                  <ShareExport calculatorName="Compound Interest Calculator" resultData={result} />
+                </div>
+              </div>
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
@@ -198,6 +236,8 @@ export default function CompoundInterestCalculator() {
           </ResponsiveContainer>
         </Card>
       )}
+      
+      <RelatedCalculators currentCalculator="compound-interest" />
     </div>
   );
 }
