@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { calculateMortgage, MortgageResult } from '@/lib/calculations/mortgage';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -104,7 +105,12 @@ export default function MortgageCalculator() {
         <Card className="p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="homePrice">Home Price ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="homePrice">Home Price ($)</Label>
+                <InfoTooltip content="The total purchase price of the home you're buying">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="homePrice"
                 type="number"
@@ -114,10 +120,16 @@ export default function MortgageCalculator() {
               {errors.homePrice && (
                 <p className="text-sm text-red-500">{errors.homePrice.message}</p>
               )}
+              <InputHint typical="$200,000 - $800,000" example="$400,000" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="downPayment">Down Payment ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="downPayment">Down Payment ($)</Label>
+                <InfoTooltip content="Amount paid upfront. 20% down avoids PMI insurance">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="downPayment"
                 type="number"
@@ -130,13 +142,20 @@ export default function MortgageCalculator() {
               {watch('homePrice') > 0 && watch('downPayment') > 0 && (
                 <p className="text-sm text-gray-500">
                   {((watch('downPayment') / watch('homePrice')) * 100).toFixed(1)}% down
+                  {watch('downPayment') / watch('homePrice') < 0.2 && ' - PMI required'}
                 </p>
               )}
+              <InputHint typical="10-20% of home price" example="$80,000 (20%)" />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="loanTerm">Loan Term (Years)</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="loanTerm">Loan Term (Years)</Label>
+                  <InfoTooltip content="Length of mortgage. Common terms are 15 or 30 years">
+                    <span className="text-gray-400 cursor-help">ⓘ</span>
+                  </InfoTooltip>
+                </div>
                 <Input
                   id="loanTerm"
                   type="number"
@@ -145,10 +164,16 @@ export default function MortgageCalculator() {
                 {errors.loanTerm && (
                   <p className="text-sm text-red-500">{errors.loanTerm.message}</p>
                 )}
+                <InputHint typical="15 or 30 years" />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="interestRate">Interest Rate (%)</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="interestRate">Interest Rate (%)</Label>
+                  <InfoTooltip content="Annual interest rate on your mortgage loan">
+                    <span className="text-gray-400 cursor-help">ⓘ</span>
+                  </InfoTooltip>
+                </div>
                 <Input
                   id="interestRate"
                   type="number"
@@ -158,37 +183,56 @@ export default function MortgageCalculator() {
                 {errors.interestRate && (
                   <p className="text-sm text-red-500">{errors.interestRate.message}</p>
                 )}
+                <InputHint typical="5.5% - 7.5%" example="6.5%" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="propertyTax">Annual Property Tax ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="propertyTax">Annual Property Tax ($)</Label>
+                <InfoTooltip content="Yearly property tax. Typically 0.5-2% of home value">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="propertyTax"
                 type="number"
                 step="100"
                 {...register('propertyTax', { valueAsNumber: true })}
               />
+              <InputHint typical="0.5-2% of home value" example="$4,800/year" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="homeInsurance">Annual Home Insurance ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="homeInsurance">Annual Home Insurance ($)</Label>
+                <InfoTooltip content="Yearly homeowners insurance premium">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="homeInsurance"
                 type="number"
                 step="100"
                 {...register('homeInsurance', { valueAsNumber: true })}
               />
+              <InputHint typical="$800 - $2,000/year" example="$1,200/year" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="hoa">Monthly HOA ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="hoa">Monthly HOA ($)</Label>
+                <InfoTooltip content="Homeowners Association monthly fees (if applicable)">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="hoa"
                 type="number"
                 step="10"
                 {...register('hoa', { valueAsNumber: true })}
               />
+              <InputHint typical="$0 - $500/month" example="$150/month" />
             </div>
 
             <Button type="submit" className="w-full">

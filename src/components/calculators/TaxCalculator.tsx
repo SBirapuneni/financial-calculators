@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { calculateTax, TaxResult } from '@/lib/calculations/tax';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -81,7 +82,12 @@ export default function TaxCalculator() {
         <Card className="p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="annualIncome">Annual Income ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="annualIncome">Annual Income ($)</Label>
+                <InfoTooltip content="Your gross annual income before taxes and deductions">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="annualIncome"
                 type="number"
@@ -91,10 +97,16 @@ export default function TaxCalculator() {
               {errors.annualIncome && (
                 <p className="text-sm text-red-500">{errors.annualIncome.message}</p>
               )}
+              <InputHint example="$75,000" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="filingStatus">Filing Status</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="filingStatus">Filing Status</Label>
+                <InfoTooltip content="Your tax filing status affects brackets and deductions">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <select
                 id="filingStatus"
                 {...register('filingStatus')}
@@ -108,7 +120,12 @@ export default function TaxCalculator() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="stateTaxRate">State Tax Rate (%)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="stateTaxRate">State Tax Rate (%)</Label>
+                <InfoTooltip content="Your state's income tax rate. Some states have no income tax">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="stateTaxRate"
                 type="number"
@@ -118,32 +135,42 @@ export default function TaxCalculator() {
               {errors.stateTaxRate && (
                 <p className="text-sm text-red-500">{errors.stateTaxRate.message}</p>
               )}
-              <p className="text-sm text-gray-500">
-                Enter 0 if your state has no income tax (e.g., TX, FL, WA)
-              </p>
+              <InputHint range="0-15%" example="5% (CA: 9.3%, TX/FL: 0%)" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="deductions">Additional Deductions ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="deductions">Additional Deductions ($)</Label>
+                <InfoTooltip content="Itemized deductions beyond the standard deduction (mortgage interest, charitable donations, etc.)">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="deductions"
                 type="number"
                 step="100"
                 {...register('deductions', { valueAsNumber: true })}
               />
+              <InputHint example="$5,000" />
               <p className="text-sm text-gray-500">
                 Standard deduction is included automatically
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="credits">Tax Credits ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="credits">Tax Credits ($)</Label>
+                <InfoTooltip content="Direct reductions to your tax bill (child tax credit, education credits, etc.)">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="credits"
                 type="number"
                 step="100"
                 {...register('credits', { valueAsNumber: true })}
               />
+              <InputHint example="$2,000 (per child)" />
               <p className="text-sm text-gray-500">
                 Child tax credit, education credits, etc.
               </p>

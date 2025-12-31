@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
+import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
 import { calculateRetirement, RetirementResult } from '@/lib/calculations/retirement';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
@@ -80,7 +81,12 @@ export default function RetirementCalculator() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="currentAge">Current Age</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="currentAge">Current Age</Label>
+                  <InfoTooltip content="Your age today">
+                    <span className="text-gray-400 cursor-help">ⓘ</span>
+                  </InfoTooltip>
+                </div>
                 <Input
                   id="currentAge"
                   type="number"
@@ -89,10 +95,16 @@ export default function RetirementCalculator() {
                 {errors.currentAge && (
                   <p className="text-sm text-red-500">{errors.currentAge.message}</p>
                 )}
+                <InputHint range="18-100 years" />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="retirementAge">Retirement Age</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="retirementAge">Retirement Age</Label>
+                  <InfoTooltip content="Age when you plan to retire">
+                    <span className="text-gray-400 cursor-help">ⓘ</span>
+                  </InfoTooltip>
+                </div>
                 <Input
                   id="retirementAge"
                   type="number"
@@ -101,11 +113,17 @@ export default function RetirementCalculator() {
                 {errors.retirementAge && (
                   <p className="text-sm text-red-500">{errors.retirementAge.message}</p>
                 )}
+                <InputHint typical="62-67 years" example="65" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="currentSavings">Current Savings ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="currentSavings">Current Savings ($)</Label>
+                <InfoTooltip content="Total retirement savings you have right now (401k, IRA, etc.)">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="currentSavings"
                 type="number"
@@ -115,10 +133,16 @@ export default function RetirementCalculator() {
               {errors.currentSavings && (
                 <p className="text-sm text-red-500">{errors.currentSavings.message}</p>
               )}
+              <InputHint example="$50,000" />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="monthlyContribution">Monthly Contribution ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="monthlyContribution">Monthly Contribution ($)</Label>
+                <InfoTooltip content="Amount you plan to save each month for retirement">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="monthlyContribution"
                 type="number"
@@ -128,11 +152,17 @@ export default function RetirementCalculator() {
               {errors.monthlyContribution && (
                 <p className="text-sm text-red-500">{errors.monthlyContribution.message}</p>
               )}
+              <InputHint typical="10-15% of income" example="$1,000" />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="expectedReturn">Expected Return (%)</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="expectedReturn">Expected Return (%)</Label>
+                  <InfoTooltip content="Average annual investment return before retirement">
+                    <span className="text-gray-400 cursor-help">ⓘ</span>
+                  </InfoTooltip>
+                </div>
                 <Input
                   id="expectedReturn"
                   type="number"
@@ -142,10 +172,16 @@ export default function RetirementCalculator() {
                 {errors.expectedReturn && (
                   <p className="text-sm text-red-500">{errors.expectedReturn.message}</p>
                 )}
+                <InputHint typical="6-10%" example="8%" />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="inflationRate">Inflation Rate (%)</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="inflationRate">Inflation Rate (%)</Label>
+                  <InfoTooltip content="Expected average inflation rate">
+                    <span className="text-gray-400 cursor-help">ⓘ</span>
+                  </InfoTooltip>
+                </div>
                 <Input
                   id="inflationRate"
                   type="number"
@@ -155,11 +191,17 @@ export default function RetirementCalculator() {
                 {errors.inflationRate && (
                   <p className="text-sm text-red-500">{errors.inflationRate.message}</p>
                 )}
+                <InputHint typical="2-3%" example="3%" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="desiredMonthlyIncome">Desired Monthly Income in Retirement ($)</Label>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="desiredMonthlyIncome">Desired Monthly Income in Retirement ($)</Label>
+                <InfoTooltip content="Monthly income you want in retirement (in today's dollars)">
+                  <span className="text-gray-400 cursor-help">ⓘ</span>
+                </InfoTooltip>
+              </div>
               <Input
                 id="desiredMonthlyIncome"
                 type="number"
@@ -169,6 +211,7 @@ export default function RetirementCalculator() {
               {errors.desiredMonthlyIncome && (
                 <p className="text-sm text-red-500">{errors.desiredMonthlyIncome.message}</p>
               )}
+              <InputHint typical="70-80% of current income" example="$5,000" />
             </div>
 
             <Button type="submit" className="w-full">
