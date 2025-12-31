@@ -42,7 +42,7 @@ export default function LoanPayoffCalculator() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="currentBalance">Current Loan Balance (₹)</Label>
+            <Label htmlFor="currentBalance">Current Loan Balance ($)</Label>
             <Input
               id="currentBalance"
               type="number"
@@ -65,7 +65,7 @@ export default function LoanPayoffCalculator() {
           </div>
 
           <div>
-            <Label htmlFor="minimumPayment">Minimum Monthly Payment (₹)</Label>
+            <Label htmlFor="minimumPayment">Minimum Monthly Payment ($)</Label>
             <Input
               id="minimumPayment"
               type="number"
@@ -76,7 +76,7 @@ export default function LoanPayoffCalculator() {
           </div>
 
           <div>
-            <Label htmlFor="extraPayment">Extra Monthly Payment (₹)</Label>
+            <Label htmlFor="extraPayment">Extra Monthly Payment ($)</Label>
             <Input
               id="extraPayment"
               type="number"
@@ -115,7 +115,7 @@ export default function LoanPayoffCalculator() {
                 Total Payment
               </h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                ₹{result.totalPayment.toLocaleString()}
+                ${result.totalPayment.toLocaleString()}
               </p>
             </Card>
 
@@ -136,7 +136,7 @@ export default function LoanPayoffCalculator() {
                 Interest Saved
               </h3>
               <p className="text-3xl font-bold text-green-600">
-                ₹{result.interestSaved.toLocaleString()}
+                ${result.interestSaved.toLocaleString()}
               </p>
             </Card>
           </div>
@@ -164,7 +164,7 @@ export default function LoanPayoffCalculator() {
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Current Balance:</span>
-                <span className="font-semibold">₹{currentBalance.toLocaleString()}</span>
+                <span className="font-semibold">${currentBalance.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Interest Rate:</span>
@@ -172,15 +172,15 @@ export default function LoanPayoffCalculator() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Minimum Payment:</span>
-                <span className="font-semibold">₹{minimumPayment.toLocaleString()}/month</span>
+                <span className="font-semibold">${minimumPayment.toLocaleString()}/month</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Extra Payment:</span>
-                <span className="font-semibold">₹{extraPayment.toLocaleString()}/month</span>
+                <span className="font-semibold">${extraPayment.toLocaleString()}/month</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Total Monthly Payment:</span>
-                <span className="font-semibold text-blue-600">₹{(minimumPayment + extraPayment).toLocaleString()}/month</span>
+                <span className="font-semibold text-blue-600">${(minimumPayment + extraPayment).toLocaleString()}/month</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Payoff Time:</span>
@@ -188,7 +188,7 @@ export default function LoanPayoffCalculator() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Total Interest Paid:</span>
-                <span className="font-semibold">₹{result.totalInterest.toLocaleString()}</span>
+                <span className="font-semibold">${result.totalInterest.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Time Saved:</span>
@@ -202,8 +202,8 @@ export default function LoanPayoffCalculator() {
               💡 Impact of Extra Payments
             </h3>
             <p className="text-green-800 dark:text-green-200">
-              By paying an extra ₹{extraPayment.toLocaleString()} per month, you&apos;ll save{' '}
-              <strong>₹{result.interestSaved.toLocaleString()}</strong> in interest and pay off your loan{' '}
+              By paying an extra ${extraPayment.toLocaleString()} per month, you&apos;ll save{' '}
+              <strong>${result.interestSaved.toLocaleString()}</strong> in interest and pay off your loan{' '}
               <strong>{result.timeSaved} months</strong> ({Math.floor(result.timeSaved / 12)} years {result.timeSaved % 12} months) earlier!
             </p>
           </div>

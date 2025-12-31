@@ -46,7 +46,7 @@ export default function EMICalculator() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="principal">Loan Amount (₹)</Label>
+            <Label htmlFor="principal">Loan Amount ($)</Label>
             <Input
               id="principal"
               type="number"
@@ -96,7 +96,7 @@ export default function EMICalculator() {
                 Monthly EMI
               </h3>
               <p className="text-3xl font-bold text-blue-600">
-                ₹{result.monthlyEMI.toLocaleString()}
+                ${result.monthlyEMI.toLocaleString()}
               </p>
             </Card>
 
@@ -105,7 +105,7 @@ export default function EMICalculator() {
                 Total Payment
               </h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                ₹{result.totalPayment.toLocaleString()}
+                ${result.totalPayment.toLocaleString()}
               </p>
             </Card>
 
@@ -114,7 +114,7 @@ export default function EMICalculator() {
                 Total Interest
               </h3>
               <p className="text-3xl font-bold text-red-600">
-                ₹{result.totalInterest.toLocaleString()}
+                ${result.totalInterest.toLocaleString()}
               </p>
             </Card>
           </div>
@@ -176,7 +176,7 @@ export default function EMICalculator() {
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Loan Amount:</span>
-                <span className="font-semibold">₹{principal.toLocaleString()}</span>
+                <span className="font-semibold">${principal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Interest Rate:</span>
@@ -188,15 +188,15 @@ export default function EMICalculator() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Monthly EMI:</span>
-                <span className="font-semibold text-blue-600">₹{result.monthlyEMI.toLocaleString()}</span>
+                <span className="font-semibold text-blue-600">${result.monthlyEMI.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Total Amount Payable:</span>
-                <span className="font-semibold">₹{result.totalPayment.toLocaleString()}</span>
+                <span className="font-semibold">${result.totalPayment.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Total Interest:</span>
-                <span className="font-semibold text-red-600">₹{result.totalInterest.toLocaleString()}</span>
+                <span className="font-semibold text-red-600">${result.totalInterest.toLocaleString()}</span>
               </div>
             </div>
           </Card>

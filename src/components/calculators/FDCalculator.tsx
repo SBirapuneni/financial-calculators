@@ -53,7 +53,7 @@ export default function FDCalculator() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="principal">Deposit Amount (₹)</Label>
+            <Label htmlFor="principal">Deposit Amount ($)</Label>
             <Input
               id="principal"
               type="number"
@@ -121,7 +121,7 @@ export default function FDCalculator() {
                 Maturity Amount
               </h3>
               <p className="text-3xl font-bold text-blue-600">
-                ₹{result.maturityAmount.toLocaleString()}
+                ${result.maturityAmount.toLocaleString()}
               </p>
             </Card>
 
@@ -130,7 +130,7 @@ export default function FDCalculator() {
                 Interest Earned
               </h3>
               <p className="text-3xl font-bold text-green-600">
-                ₹{result.interestEarned.toLocaleString()}
+                ${result.interestEarned.toLocaleString()}
               </p>
             </Card>
 
@@ -201,7 +201,7 @@ export default function FDCalculator() {
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Deposit Amount:</span>
-                <span className="font-semibold">₹{principal.toLocaleString()}</span>
+                <span className="font-semibold">${principal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Interest Rate:</span>
@@ -217,11 +217,11 @@ export default function FDCalculator() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Maturity Amount:</span>
-                <span className="font-semibold text-blue-600">₹{result.maturityAmount.toLocaleString()}</span>
+                <span className="font-semibold text-blue-600">${result.maturityAmount.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Interest Earned:</span>
-                <span className="font-semibold text-green-600">₹{result.interestEarned.toLocaleString()}</span>
+                <span className="font-semibold text-green-600">${result.interestEarned.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Effective Annual Rate:</span>
@@ -242,18 +242,18 @@ export default function FDCalculator() {
               <div>
                 <p className="text-sm text-blue-800 dark:text-blue-200 mb-1">With Compound Interest:</p>
                 <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
-                  ₹{result.maturityAmount.toLocaleString()}
+                  ${result.maturityAmount.toLocaleString()}
                 </p>
               </div>
               <div>
                 <p className="text-sm text-blue-800 dark:text-blue-200 mb-1">With Simple Interest:</p>
                 <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
-                  ₹{simpleInterestAmount.toLocaleString()}
+                  ${simpleInterestAmount.toLocaleString()}
                 </p>
               </div>
             </div>
             <p className="text-blue-800 dark:text-blue-200 mt-3">
-              You earn <strong>₹{(result.maturityAmount - simpleInterestAmount).toLocaleString()}</strong> more with compound interest!
+              You earn <strong>${(result.maturityAmount - simpleInterestAmount).toLocaleString()}</strong> more with compound interest!
             </p>
           </div>
         </>
