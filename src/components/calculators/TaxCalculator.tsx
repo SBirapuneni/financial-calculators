@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { calculateTax, TaxResult } from '@/lib/calculations/tax';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -360,6 +361,8 @@ export default function TaxCalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="tax" />
     </div>
   );
 }

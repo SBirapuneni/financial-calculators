@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { calculateMortgage, MortgageResult } from '@/lib/calculations/mortgage';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
@@ -396,6 +397,8 @@ export default function MortgageCalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="mortgage" />
     </div>
   );
 }

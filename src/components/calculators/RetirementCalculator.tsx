@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ShareExport } from '@/components/shared/ShareExport';
 import { Tooltip as InfoTooltip, InputHint } from '@/components/ui/tooltip';
+import { RelatedCalculators } from '@/components/shared/RelatedCalculators';
 import { calculateRetirement, RetirementResult } from '@/lib/calculations/retirement';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
@@ -355,6 +356,8 @@ export default function RetirementCalculator() {
           </Card>
         </>
       )}
+      
+      <RelatedCalculators currentCalculator="retirement" />
     </div>
   );
 }
