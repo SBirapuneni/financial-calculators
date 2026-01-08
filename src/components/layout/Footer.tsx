@@ -89,7 +89,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-gray-600 dark:text-gray-400">
           <p>
-            © {currentYear} Financial Calculators. All rights reserved.
+            © {currentYear} UtilityHub Calculators. All rights reserved.
           </p>
           <p className="mt-2 text-xs">
             Disclaimer: The calculators provided are for educational purposes

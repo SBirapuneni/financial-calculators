@@ -3,8 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Mail, MessageSquare, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact Us - Financial Calculators",
-  description: "Get in touch with the Financial Calculators team. We'd love to hear your feedback and suggestions.",
+  title: "Contact Us | UtilityHub Calculators",
+  description: "Get in touch with the UtilityHub Calculators team. We'd love to hear your feedback and suggestions.",
 };
 
 export default function ContactPage() {
@@ -40,10 +40,10 @@ export default function ContactPage() {
                     For general inquiries and support:
                   </p>
                   <a 
-                    href="mailto:support@financialcalculators.com" 
+                    href="mailto:support@utltyhub.com" 
                     className="text-blue-600 hover:underline"
                   >
-                    support@financialcalculators.com
+                    support@utltyhub.com
                   </a>
                 </div>
               </div>
@@ -60,10 +60,10 @@ export default function ContactPage() {
                     Help us improve:
                   </p>
                   <a 
-                    href="mailto:feedback@financialcalculators.com" 
+                    href="mailto:feedback@utltyhub.com" 
                     className="text-blue-600 hover:underline"
                   >
-                    feedback@financialcalculators.com
+                    feedback@utltyhub.com
                   </a>
                 </div>
               </div>

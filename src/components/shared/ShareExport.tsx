@@ -11,7 +11,7 @@ interface ShareExportProps {
 
 export function ShareExport({ calculatorName, resultData, onExportPDF }: ShareExportProps) {
   const handleShare = async () => {
-    const shareText = `Check out my ${calculatorName} results on Financial Calculators!`;
+    const shareText = `Check out my ${calculatorName} results on UtilityHub Calculators!`;
     const shareUrl = window.location.href;
 
     if (navigator.share) {

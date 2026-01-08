@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Calculator, Wallet, Home, Receipt, TrendingUp, DollarSign, PiggyBank, CreditCard, ArrowRightLeft, Landmark } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "All Financial Calculators - Free Tools for Smart Money Decisions",
+  title: "All Financial Calculators - Free Tools for Smart Money Decisions | UtilityHub",
   description: "Browse our complete collection of free financial calculators including retirement, mortgage, tax, loan, SIP, EMI, FD, and compound interest calculators.",
 };
 
@@ -103,7 +103,7 @@ export default function CalculatorsPage() {
             </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
-            Financial Calculators
+            All Calculators
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Free, easy-to-use calculators to help you make informed financial decisions. 

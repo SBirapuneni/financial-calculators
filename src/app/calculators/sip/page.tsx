@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
-  title: 'SIP Calculator | Financial Calculators',
+  title: 'SIP Calculator | UtilityHub',
   description: 'Calculate returns on your Systematic Investment Plan (SIP). Plan your mutual fund investments and see the power of compounding with our SIP calculator.',
   keywords: 'SIP calculator, systematic investment plan, mutual fund calculator, SIP returns calculator',
   openGraph: {

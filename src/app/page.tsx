@@ -5,11 +5,11 @@ import { Metadata } from "next";
 import NewsletterSignup from "@/components/shared/NewsletterSignup";
 
 export const metadata: Metadata = {
-  title: "Free Financial Calculators - Retirement, Mortgage, Tax, Loan, EMI & Investment | 2025",
+  title: "Free Financial Calculators - Retirement, Mortgage, Tax, Loan, EMI & Investment | UtilityHub",
   description: "Free online financial calculators for retirement planning, mortgage payments, tax estimates, loans, EMI, SIP, FD, and compound interest. Make smarter financial decisions with our easy-to-use tools.",
   keywords: "financial calculator, retirement calculator, mortgage calculator, tax calculator, loan calculator, SIP calculator, compound interest calculator, investment calculator, EMI calculator, FD calculator",
   openGraph: {
-    title: "Free Financial Calculators - Plan Your Financial Future",
+    title: "UtilityHub Calculators - Plan Your Financial Future",
     description: "Calculate retirement savings, mortgage payments, taxes, EMI, and investment returns with our free tools",
     type: "website",
   },
@@ -97,7 +97,7 @@ export default function Home() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'Financial Calculators',
+            name: 'UtilityHub Calculators',
             description: 'Free financial calculators for retirement, mortgage, tax, and investment planning',
             url: 'https://calculators.utltyhub.com',
             potentialAction: {
@@ -114,7 +114,7 @@ export default function Home() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Financial Calculators',
+            name: 'UtilityHub Calculators',
             description: 'Free online financial planning tools and calculators',
             url: 'https://calculators.utltyhub.com',
           }),
@@ -130,7 +130,7 @@ export default function Home() {
             </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
-            Financial Calculators
+            UtilityHub Calculators
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Make informed financial decisions with our easy-to-use calculators. 

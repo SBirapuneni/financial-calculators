@@ -4,8 +4,8 @@ import { Card } from "@/components/ui/card";
 import { AlertTriangle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Disclaimer",
-  description: "Important disclaimer about Financial Calculators - Limitations and legal notices",
+  title: "Disclaimer | UtilityHub Calculators",
+  description: "Important disclaimer about UtilityHub Calculators - Limitations and legal notices",
 };
 
 export default function Disclaimer() {
@@ -21,7 +21,7 @@ export default function Disclaimer() {
         
         <Card className="p-8 space-y-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Last Updated: December 5, 2025
+            Last Updated: January 7, 2026
           </p>
 
           <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-6">
@@ -29,7 +29,7 @@ export default function Disclaimer() {
               PLEASE READ CAREFULLY
             </h2>
             <p className="text-gray-700 dark:text-gray-300">
-              The information and calculators provided on Financial Calculators are for educational 
+              The information and calculators provided on UtilityHub Calculators are for educational 
               and informational purposes only and should not be construed as professional financial, 
               investment, tax, or legal advice.
             </p>
@@ -38,7 +38,7 @@ export default function Disclaimer() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">1. No Financial Advice</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Financial Calculators does not provide financial, investment, tax, or legal advice. 
+              UtilityHub Calculators does not provide financial, investment, tax, or legal advice. 
               The calculators and content on this website are tools to help you understand financial 
               concepts and estimate potential outcomes. They should not be used as the sole basis 
               for financial decisions.
@@ -89,7 +89,7 @@ export default function Disclaimer() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">5. Limitation of Liability</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Financial Calculators and its operators shall not be liable for:
+              UtilityHub Calculators and its operators shall not be liable for:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
               <li>Any financial losses resulting from use of our calculators</li>
@@ -188,15 +188,15 @@ export default function Disclaimer() {
             </p>
             <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <p className="text-gray-700 dark:text-gray-300">
-                Email: legal@financialcalculators.com<br />
-                Website: <Link href="/" className="text-blue-600 hover:underline">financialcalculators.com</Link>
+                Email: legal@utltyhub.com<br />
+                Website: <Link href="/" className="text-blue-600 hover:underline">calculators.utltyhub.com</Link>
               </p>
             </div>
           </section>
 
           <div className="border-t pt-6 mt-8">
             <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-              By using Financial Calculators, you acknowledge that you have read and understood 
+              By using UtilityHub Calculators, you acknowledge that you have read and understood 
               this disclaimer and agree to its terms. If you do not agree, please do not use 
               this website.
             </p>

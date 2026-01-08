@@ -4,7 +4,7 @@ import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper'
 import { Calculator } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'EMI Calculator - Calculate Loan EMI | Financial Calculators',
+  title: 'EMI Calculator - Calculate Loan EMI | UtilityHub',
   description: 'Free EMI calculator to calculate your loan EMI (Equated Monthly Installment), total interest, and payment breakdown. Plan your home loan, car loan, or personal loan repayment.',
   keywords: ['emi calculator', 'loan emi', 'home loan calculator', 'car loan emi', 'personal loan calculator', 'monthly installment calculator', 'loan repayment calculator'],
 };

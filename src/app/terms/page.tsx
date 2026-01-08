@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "Terms of Service for Financial Calculators - User agreement and conditions of use",
+  title: "Terms of Service | UtilityHub Calculators",
+  description: "Terms of Service for UtilityHub Calculators - User agreement and conditions of use",
 };
 
 export default function TermsOfService() {
@@ -17,13 +17,13 @@ export default function TermsOfService() {
         
         <Card className="p-8 space-y-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Last Updated: December 5, 2025
+            Last Updated: January 7, 2026
           </p>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-700 dark:text-gray-300">
-              By accessing and using Financial Calculators ("the Service"), you accept and agree to 
+              By accessing and using UtilityHub Calculators ("the Service"), you accept and agree to 
               be bound by these Terms of Service. If you do not agree to these terms, please do not 
               use our Service.
             </p>
@@ -32,7 +32,7 @@ export default function TermsOfService() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">2. Description of Service</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Financial Calculators provides free online financial calculation tools including but 
+              UtilityHub Calculators provides free online financial calculation tools including but 
               not limited to:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
@@ -93,7 +93,7 @@ export default function TermsOfService() {
             <h2 className="text-2xl font-semibold mb-4">6. Intellectual Property</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               All content on this website, including text, graphics, logos, calculator algorithms, 
-              and software, is the property of Financial Calculators and is protected by copyright 
+              and software, is the property of UtilityHub Calculators and is protected by copyright 
               and intellectual property laws.
             </p>
             <p className="text-gray-700 dark:text-gray-300">
@@ -177,15 +177,15 @@ export default function TermsOfService() {
             </p>
             <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <p className="text-gray-700 dark:text-gray-300">
-                Email: legal@financialcalculators.com<br />
-                Website: <Link href="/" className="text-blue-600 hover:underline">financialcalculators.com</Link>
+                Email: legal@utltyhub.com<br />
+                Website: <Link href="/" className="text-blue-600 hover:underline">calculators.utltyhub.com</Link>
               </p>
             </div>
           </section>
 
           <section className="border-t pt-6">
             <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-              By using Financial Calculators, you acknowledge that you have read, understood, and 
+              By using UtilityHub Calculators, you acknowledge that you have read, understood, and 
               agree to be bound by these Terms of Service.
             </p>
           </section>

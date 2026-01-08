@@ -4,7 +4,7 @@ import { ArrowLeft, Share2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Complete Retirement Planning Guide for 2025 | Financial Calculators Blog',
+  title: 'Complete Retirement Planning Guide for 2025 | UtilityHub Blog',
   description: 'Learn how to plan for a comfortable retirement with our comprehensive 2025 guide covering savings strategies, investment options, 401(k) planning, and common mistakes to avoid.',
   keywords: 'retirement planning 2025, retirement savings, 401k, IRA, pension planning, retirement calculator',
   openGraph: {
@@ -28,7 +28,7 @@ export default function RetirementPlanningGuidePage() {
             datePublished: '2025-12-01',
             author: {
               '@type': 'Organization',
-              name: 'Financial Calculators',
+              name: 'UtilityHub',
             },
           }),
         }}

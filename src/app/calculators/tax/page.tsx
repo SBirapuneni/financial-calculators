@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
-  title: 'Income Tax Calculator 2025 - Estimate Your Tax Refund | Financial Calculators',
+  title: 'Income Tax Calculator 2025 - Estimate Your Tax Refund | UtilityHub',
   description: 'Free 2025 income tax calculator. Estimate your federal tax, take-home pay, and tax refund. Updated with latest tax brackets and deductions.',
   keywords: 'tax calculator, income tax calculator, tax refund calculator, 2025 tax calculator, federal tax calculator, tax estimator',
   openGraph: {

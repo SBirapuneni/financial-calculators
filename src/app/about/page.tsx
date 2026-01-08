@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Calculator, TrendingUp, Users, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us - Financial Calculators",
+  title: "About Us | UtilityHub Calculators",
   description: "Learn about our mission to provide free, accurate financial calculators to help you make informed decisions about your money.",
 };
 
@@ -19,7 +19,7 @@ export default function AboutPage() {
             </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">
-            About Financial Calculators
+            About UtilityHub Calculators
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Empowering individuals to make informed financial decisions through free, easy-to-use calculators and educational resources.
@@ -135,7 +135,7 @@ export default function AboutPage() {
           <Card className="p-8 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Important Disclaimer</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Financial Calculators provides educational tools and information only. We are not financial advisors, and our 
+              UtilityHub Calculators provides educational tools and information only. We are not financial advisors, and our 
               calculators should not be considered financial advice. Always consult with a qualified financial professional 
               before making important financial decisions. Results from our calculators are estimates based on the information 
               you provide and should be used for general planning purposes only.

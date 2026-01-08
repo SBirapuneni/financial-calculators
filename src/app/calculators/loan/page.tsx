@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
-  title: 'Loan Calculator | Financial Calculators',
+  title: 'Loan Calculator | UtilityHub',
   description: 'Calculate your monthly loan payments and view detailed amortization schedule. Plan your home loan, car loan, or personal loan with our free loan calculator.',
   keywords: 'loan calculator, EMI calculator, personal loan calculator, amortization calculator',
   openGraph: {

@@ -4,7 +4,7 @@ import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper'
 import { Calculator } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Loan Payoff Calculator - Calculate Debt Payoff Time | Financial Calculators',
+  title: 'Loan Payoff Calculator - Calculate Debt Payoff Time | UtilityHub',
   description: 'Free loan payoff calculator to see how extra payments can help you pay off your loan faster and save on interest. Calculate time and money saved with additional payments.',
   keywords: ['loan payoff calculator', 'debt payoff', 'extra payment calculator', 'loan payment calculator', 'debt reduction', 'interest savings'],
 };

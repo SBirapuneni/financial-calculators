@@ -4,7 +4,7 @@ import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper'
 import { Calculator } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'APR to APY Calculator - Convert Interest Rates | Financial Calculators',
+  title: 'APR to APY Calculator - Convert Interest Rates | UtilityHub',
   description: 'Free APR to APY converter and calculator. Understand the difference between Annual Percentage Rate (APR) and Annual Percentage Yield (APY) and convert between them.',
   keywords: ['apr to apy calculator', 'apy to apr converter', 'annual percentage rate', 'annual percentage yield', 'interest rate calculator', 'effective interest rate'],
 };

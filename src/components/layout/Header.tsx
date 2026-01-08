@@ -9,7 +9,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Calculator className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold">Financial Calculators</span>
+            <span className="text-xl font-bold">UtilityHub Calculators</span>
           </Link>
           
           <div className="flex items-center gap-6">

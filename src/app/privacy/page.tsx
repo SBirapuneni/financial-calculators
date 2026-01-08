@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "Privacy policy for Financial Calculators - Learn how we collect, use, and protect your data",
+  title: "Privacy Policy | UtilityHub Calculators",
+  description: "Privacy policy for UtilityHub Calculators - Learn how we collect, use, and protect your data",
 };
 
 export default function PrivacyPolicy() {
@@ -17,13 +17,13 @@ export default function PrivacyPolicy() {
         
         <Card className="p-8 space-y-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Last Updated: December 5, 2025
+            Last Updated: January 7, 2026
           </p>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Financial Calculators ("we", "our", or "us") is committed to protecting your privacy. 
+              UtilityHub Calculators ("we", "our", or "us") is committed to protecting your privacy. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
               when you visit our website.
             </p>
@@ -140,7 +140,7 @@ export default function PrivacyPolicy() {
               <li><strong>Data Portability:</strong> Request a copy of your data</li>
             </ul>
             <p className="text-gray-700 dark:text-gray-300">
-              To exercise these rights, please contact us at privacy@financialcalculators.com
+              To exercise these rights, please contact us at privacy@utltyhub.com
             </p>
           </section>
 
@@ -175,8 +175,8 @@ export default function PrivacyPolicy() {
             </p>
             <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <p className="text-gray-700 dark:text-gray-300">
-                Email: privacy@financialcalculators.com<br />
-                Website: <Link href="/" className="text-blue-600 hover:underline">financialcalculators.com</Link>
+                Email: privacy@utltyhub.com<br />
+                Website: <Link href="/" className="text-blue-600 hover:underline">calculators.utltyhub.com</Link>
               </p>
             </div>
           </section>

@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { ChevronDown } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "FAQ - Frequently Asked Questions",
+  title: "FAQ - Frequently Asked Questions | UtilityHub Calculators",
   description: "Answers to common questions about our financial calculators, privacy, and how to use our tools",
 };
 

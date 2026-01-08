@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Financial Planning Blog - Tips, Guides & Calculator How-Tos | Financial Calculators',
+  title: 'Financial Planning Blog - Tips, Guides & Calculator How-Tos | UtilityHub',
   description: 'Expert financial planning tips, investment guides, and calculator tutorials. Learn about retirement planning, mortgages, taxes, and smart money management.',
   keywords: 'financial planning, investment guide, retirement tips, mortgage advice, tax planning, money management',
 };
@@ -75,7 +75,7 @@ export default function BlogPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Blog',
-            name: 'Financial Calculators Blog',
+            name: 'UtilityHub Calculators Blog',
             description: 'Financial planning tips, guides, and calculator tutorials',
           }),
         }}

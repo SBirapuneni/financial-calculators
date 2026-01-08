@@ -4,7 +4,7 @@ import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper'
 import { PiggyBank } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'FD Calculator - Fixed Deposit Maturity Calculator | Financial Calculators',
+  title: 'FD Calculator - Fixed Deposit Maturity Calculator | UtilityHub',
   description: 'Free Fixed Deposit (FD) calculator to calculate maturity amount, interest earned, and returns on your FD investment. Compare compound vs simple interest.',
   keywords: ['fd calculator', 'fixed deposit calculator', 'fd maturity calculator', 'fd interest calculator', 'bank fd calculator', 'term deposit calculator'],
 };

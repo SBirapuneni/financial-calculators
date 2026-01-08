@@ -3,7 +3,7 @@ import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper'
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Retirement Calculator - Plan Your Retirement Savings | Financial Calculators',
+  title: 'Retirement Calculator - Plan Your Retirement Savings | UtilityHub',
   description: 'Calculate how much you need to save for retirement. Plan your retirement with our free calculator including expected returns, inflation, and monthly income projections.',
   keywords: 'retirement calculator, retirement planning, retirement savings, 401k calculator, pension calculator',
   openGraph: {

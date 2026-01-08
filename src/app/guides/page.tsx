@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { BookOpen, TrendingUp, PiggyBank, Home, GraduationCap, Heart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Financial Planning Guides - Learn to Manage Your Money",
+  title: "Financial Planning Guides - Learn to Manage Your Money | UtilityHub",
   description: "Comprehensive guides on retirement planning, investing, mortgages, taxes, and personal finance. Expert tips to help you achieve financial freedom.",
 };
 

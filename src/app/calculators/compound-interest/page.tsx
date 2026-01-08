@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
-  title: 'Compound Interest Calculator | Financial Calculators',
+  title: 'Compound Interest Calculator | UtilityHub',
   description: 'Calculate the future value of your investment with our compound interest calculator. See how your money grows over time with different compounding frequencies.',
   keywords: 'compound interest calculator, investment growth calculator, future value calculator',
   openGraph: {

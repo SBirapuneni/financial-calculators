@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import CalculatorPageWrapper from '@/components/analytics/CalculatorPageWrapper';
 
 export const metadata: Metadata = {
-  title: 'Mortgage Calculator - Calculate Monthly Home Loan Payments | Financial Calculators',
+  title: 'Mortgage Calculator - Calculate Monthly Home Loan Payments | UtilityHub',
   description: 'Free mortgage calculator with taxes, insurance, and PMI. Calculate your monthly mortgage payment and total cost of homeownership.',
   keywords: 'mortgage calculator, home loan calculator, mortgage payment calculator, house payment calculator, home affordability calculator',
   openGraph: {
