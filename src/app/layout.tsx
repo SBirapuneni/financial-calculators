@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/shared/CookieConsent";
 import PWAInstaller from "@/components/shared/PWAInstaller";
 import ThemeProvider from "@/components/shared/ThemeProvider";
+// Updated: January 7, 2026
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
