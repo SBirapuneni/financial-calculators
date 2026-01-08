@@ -1,16 +1,13 @@
 import Link from 'next/link';
-import { Calculator } from 'lucide-react';
 import ThemeToggle from '@/components/shared/ThemeToggle';
+import Logo from '@/components/shared/Logo';
 
 export default function Header() {
   return (
     <header className="border-b bg-white dark:bg-gray-900">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Calculator className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold">UtilityHub Calculators</span>
-          </Link>
+          <Logo />
           
           <div className="flex items-center gap-6">
             <div className="hidden md:flex space-x-6">

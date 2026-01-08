@@ -30,6 +30,16 @@ export const metadata: Metadata = {
   creator: "UtilityHub",
   publisher: "UtilityHub",
   metadataBase: new URL('https://calculators.utltyhub.com'),
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.svg', sizes: '192x192', type: 'image/svg+xml' },
+      { url: '/icon-512.svg', sizes: '512x512', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/icon-192.svg', sizes: '192x192', type: 'image/svg+xml' },
+    ],
+  },
   verification: {
     google: 'rYre4uVlZ8azo4swV3bFXUMSkDj_SutOl--QAjVLFzw',
   },

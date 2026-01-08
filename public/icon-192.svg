@@ -1,0 +1,16 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="192" height="192" rx="38" fill="#2563EB"/>
+  
+  <!-- Calculator Display -->
+  <rect x="34" y="34" width="124" height="38" rx="8" fill="white"/>
+  
+  <!-- Calculator Buttons -->
+  <circle cx="58" cy="105" r="12" fill="white"/>
+  <circle cx="96" cy="105" r="12" fill="white"/>
+  <circle cx="134" cy="105" r="12" fill="white"/>
+  
+  <circle cx="58" cy="139" r="12" fill="white"/>
+  <circle cx="96" cy="139" r="12" fill="white"/>
+  <circle cx="134" cy="139" r="12" fill="white"/>
+</svg>

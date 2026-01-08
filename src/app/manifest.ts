@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Financial Calculators - Retirement, Mortgage, Tax & Investment Tools',
-    short_name: 'FinCalc',
+    name: 'UtilityHub Calculators - Financial Planning Tools',
+    short_name: 'UtilityHub',
     description: 'Free online financial calculators for retirement planning, mortgage payments, tax estimates, and investment returns',
     start_url: '/',
     display: 'standalone',
