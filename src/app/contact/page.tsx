@@ -1,13 +1,69 @@
-import { Metadata } from "next";
+"use client";
+
+import { useState, FormEvent } from "react";
 import { Card } from "@/components/ui/card";
 import { Mail, MessageSquare, Clock } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Contact Us | UtilityHub Calculators",
-  description: "Get in touch with the UtilityHub Calculators team. We'd love to hear your feedback and suggestions.",
-};
-
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you! Your message has been sent successfully.",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
       <main className="container mx-auto px-4 py-16">
@@ -87,7 +143,20 @@ export default function ContactPage() {
           {/* Contact Form */}
           <Card className="p-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send us a Message</h2>
-            <form className="space-y-4">
+            
+            {submitStatus.type && (
+              <div
+                className={`mb-6 p-4 rounded-lg ${
+                  submitStatus.type === "success"
+                    ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200"
+                    : "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200"
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Name *
@@ -97,7 +166,10 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.name}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
                   placeholder="Your name"
                 />
               </div>
@@ -111,7 +183,10 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -125,7 +200,10 @@ export default function ContactPage() {
                   id="subject"
                   name="subject"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
                   placeholder="How can we help?"
                 />
               </div>
@@ -139,21 +217,21 @@ export default function ContactPage() {
                   name="message"
                   required
                   rows={6}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  value={formData.message}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none disabled:opacity-50"
                   placeholder="Tell us more..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                disabled={isSubmitting}
+                className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
-
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-                Note: This is a demo form. To enable submissions, integrate with a backend service.
-              </p>
             </form>
           </Card>
         </div>
